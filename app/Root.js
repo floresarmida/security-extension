@@ -10,6 +10,7 @@ export default class Root extends React.Component {
 
   render () {
     const { store } = this.props
+    console.log('Root got store:', store)
     return (
       <Provider store={store}>
         <App />

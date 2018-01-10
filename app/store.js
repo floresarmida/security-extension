@@ -24,15 +24,34 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 
+// export default function (initialState) {
+//   const store = createStore(rootReducer, initialState, enhancer)
+//   console.warn('running createStore', rootReducer, initialState, enhancer)
+//   //  Hot reload reducers outside prod
+//   if (process.env.NODE_ENV === 'development' && module.hot) {
+//     console.log('Replacing reducer in store')
+//     module.hot.accept('./reducers', () => {
+//       const nextRootReducer = require('./reducers')
+//
+//       store.replaceReducer(nextRootReducer)
+//     })
+//   }
+//   return store
+// }
 export default function (initialState) {
-  const store = createStore(rootReducer, initialState, enhancer)
-  //  Hot reload reducers outside prod
-  if (process.env.NODE_ENV === 'development' && module.hot) {
-    module.hot.accept('./reducers', () => {
-      const nextRootReducer = require('./reducers')
-
-      store.replaceReducer(nextRootReducer)
-    })
+  console.warn('Running createStore', rootReducer, initialState, enhancer)
+  console.log('ENV', process.env.NODE_ENV)
+  if (process.env.NODE_ENV === 'production') {
+    return createStore(rootReducer, initialState, enhancer)
+  } else {
+    const store = createStore(rootReducer, initialState, enhancer)
+    if (module.hot) {
+      console.log('Replacing reducer in store')
+      module.hot.accept('./reducers', () => {
+        const nextRootReducer = require('./reducers')
+        store.replaceReducer(nextRootReducer)
+      })
+    }
+    return store
   }
-  return store
 }

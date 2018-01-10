@@ -10,6 +10,7 @@ import style from './styles/App.css'
 // import * as TodoActions from '../actions/todos';
 import { addTodo, deleteTodo, editTodo, completeTodo, completeAll, clearCompleted } from './ducks/todos'
 const TodoActions = { addTodo, deleteTodo, editTodo, completeTodo, completeAll, clearCompleted }
+console.warn('import actions', addTodo, deleteTodo)
 
 @connect(
   state => ({
@@ -19,20 +20,29 @@ const TodoActions = { addTodo, deleteTodo, editTodo, completeTodo, completeAll, 
     actions: bindActionCreators(TodoActions, dispatch)
   })
 )
-export default class App extends React.Component {
+class App extends React.Component {
   static propTypes = {
     todos: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
-  };
+  }
 
   render () {
     const { todos, actions } = this.props
+    console.log('TodoActions', TodoActions)
+    console.warn('TODOS', todos)
+    console.warn('ACTIONS', actions)
 
     return (
       <div className={style.normal}>
-        <Header addTodo={actions.addTodo} />
-        <MainSection todos={todos} actions={actions} />
+        {actions
+          ? <div>
+            <Header addTodo={actions.addTodo} />
+            <MainSection todos={todos} actions={actions} />
+          </div>
+          : <span>Loading</span>
+        }
       </div>
     )
   }
 }
+export default App
