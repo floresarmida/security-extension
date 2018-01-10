@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react'
 import classnames from 'classnames'
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../ducks/todos'
 import style from '../styles/Footer.css'
+
+import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from '../ducks/todos'
 
 const FILTERS = [SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED]
 const FILTER_TITLES = {

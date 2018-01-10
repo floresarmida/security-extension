@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import App from './App'
 
-export default class Root extends Component {
+export default class Root extends React.Component {
   static propTypes = {
     store: PropTypes.object.isRequired
   };

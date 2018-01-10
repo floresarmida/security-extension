@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Root from '../../app/containers/Root'
+import Root from '../../app/Root'
 import './todoapp.css'
 
 chrome.storage.local.get('state', (obj) => {

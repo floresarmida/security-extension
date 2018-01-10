@@ -1,7 +1,7 @@
 {
-  "name": "react-chrome-extension-boilerplate",
-  "version": "0.9.0",
-  "description": "Boilerplate for Chrome extension React.js project",
+  "name": "security-extension",
+  "version": "0.0.1",
+  "description": "Capstone Project - INFO490 - Ali, Keller, Muhammad, Yul Song",
   "scripts": {
     "dev": "node scripts/dev",
     "build": "node scripts/build",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jhen0409/react-chrome-extension-boilerplate.git"
+    "url": "https://github.com/RcKeller/security-extension.git"
   },
   "keywords": [
     "chrome",
@@ -23,13 +23,17 @@
     "redux",
     "hot reload",
     "webpack",
-    "boilerplate"
+    "security",
+    "compliance",
+    "auditing",
+    "scripting",
+    "pentesting"
   ],
-  "author": "Jhen <developer@jhen.me>",
+  "author": "Keller <rykeller@uw.edu>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.3.15",
-    "babel-eslint": "^7.1.0",
+    "babel-eslint": "^8.2.1",
     "babel-loader": "^6.2.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-decorators-legacy": "^1.2.0",
@@ -46,18 +50,20 @@
     "crx": "^3.0.3",
     "css-loader": "^0.25.0",
     "css-modules-require-hook": "^4.0.5",
-    "eslint": "^3.9.1",
-    "eslint-config-airbnb": "^12.0.0",
+    "eslint": "^4.15.0",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-config-standard-react": "^5.0.0",
-    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^6.5.0",
     "eslint-plugin-standard": "^3.0.1",
     "jsdom": "^9.2.1",
     "minimist": "^1.2.0",
     "mocha": "^3.1.2",
     "postcss-loader": "^1.2.1",
+    "prop-types": "^15.6.0",
     "pug-cli": "^1.0.0-alpha6",
     "react-addons-test-utils": "^15.0.2",
     "rimraf": "^2.4.3",

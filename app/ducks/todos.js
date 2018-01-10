@@ -7,9 +7,10 @@ const EDIT_TODO = 'EDIT_TODO'
 const COMPLETE_TODO = 'COMPLETE_TODO'
 const COMPLETE_ALL = 'COMPLETE_ALL'
 const CLEAR_COMPLETED = 'CLEAR_COMPLETED'
-// const SHOW_ALL = 'show_all'
-// const SHOW_COMPLETED = 'show_completed'
-// const SHOW_ACTIVE = 'show_active'
+//  Legacy
+export const SHOW_ALL = 'SHOW_ALL'
+export const SHOW_COMPLETED = 'SHOW_COMPLETED'
+export const SHOW_ACTIVE = 'SHOW_ACTIVE'
 
 /*
 ACTIONS
