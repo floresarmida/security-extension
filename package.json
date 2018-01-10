@@ -1,6 +1,6 @@
 {
   "name": "security-extension",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Capstone Project - INFO490 - Ali, Keller, Muhammad, Yul Song",
   "scripts": {
     "dev": "node scripts/dev",

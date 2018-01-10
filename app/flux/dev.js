@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore, compose } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
-import storage from '../storage'
+import storage from './storage'
 
 // If Redux DevTools Extension is installed use it, otherwise use Redux compose
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
