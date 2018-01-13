@@ -29,6 +29,9 @@ export default class App extends Component {
     todos: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
   }
+  componentDidMount () {
+    console.log('APP:', chrome)
+  }
 
   render () {
     const { todos, actions } = this.props
