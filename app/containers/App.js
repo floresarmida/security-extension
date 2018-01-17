@@ -16,7 +16,6 @@ import Execution from '../views/Execution/Execution'
 import Composition from '../views/Composition/Composition'
 import Settings from '../views/Settings/Settings'
 
-
 @connect(
   state => ({
     view: state.config.view

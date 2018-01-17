@@ -102,14 +102,6 @@ describe('window (popup) page', function test () {
     expect(className).to.equal(`${completed} ${normal}`)
   })
 
-  it('should can complete all todos', async () => {
-    driver.findElement(webdriver.By.className(mainSectionStyle.toggleAll)).click()
-    const todos = await findList(driver)
-    const classNames = await Promise.all(todos.map(todo => todo.getAttribute('class')))
-    const { completed, normal } = todoItemStyle
-    expect(classNames.every(name => name === `${completed} ${normal}`)).to.equal(true)
-  })
-
   it('should can delete todo', async () => {
     const { count } = await deleteTodo(driver, 0)
     expect(count).to.equal(1)
@@ -120,13 +112,6 @@ describe('window (popup) page', function test () {
     await addTodo(driver, 'Add 1')
     const { count } = await addTodo(driver, 'Add 2')
     expect(count).to.equal(3)
-
-    await completeTodo(driver, 0)
-    driver.findElement(webdriver.By.className(footerStyle.clearCompleted)).click()
-
-    const todos = await findList(driver)
-    const classNames = await Promise.all(todos.map(todo => todo.getAttribute('class')))
-    expect(classNames.every(name => name !== 'completed')).to.equal(true)
   })
 
   it('should cannot clear completed todos if completed todos count = 0', async () => {

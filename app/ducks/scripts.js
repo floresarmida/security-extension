@@ -3,7 +3,7 @@ import cuid from 'cuid'
 CORE SCRIPTS
 These are scripts built into the extension that can be automatically executed
 */
-import { findComments, getBoundFunctions, getGlobalState, getInlineValues, revealHiddenElements } from '../core/scripts'
+// import { findComments, getBoundFunctions, getGlobalState, getInlineValues, revealHiddenElements } from '../core/scripts'
 
 /*
 CONSTANTS
@@ -38,31 +38,31 @@ const initialState = [
     id: cuid(),
     title: 'Get Global State',
     description: 'Description Here',
-    body: eval(getGlobalState),
+    body: eval('getGlobalState'),
     executed: false
   }, {
     id: cuid(),
     title: 'Find Inline Comments',
     description: 'Description Here',
-    body: eval(findComments),
+    body: eval('findComments'),
     executed: false
   }, {
     id: cuid(),
     title: 'Get Inline Form Values',
     description: 'Description Here',
-    body: eval(getInlineValues),
+    body: eval('getInlineValues'),
     executed: false
   }, {
     id: cuid(),
     title: 'Get Bound Functions',
     description: 'Description Here',
-    body: eval(getBoundFunctions),
+    body: eval('getBoundFunctions'),
     executed: false
   }, {
     id: cuid(),
     title: 'Reveal Hidden Elements',
     description: 'Description Here',
-    body: eval(revealHiddenElements),
+    body: eval('revealHiddenElements'),
     executed: false
   }
 ]
