@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { addScript, editScript } from '../../ducks/scripts'
 const actions = { addScript, editScript }
 //  Styles
-import style from '../../styles/Execution.css'
+import '../../styles/Execution.css'
 
 @connect(
   state => ({
@@ -23,7 +23,7 @@ export default class Execution extends React.Component {
   render ({ scripts } = this.props) {
     console.log('Execution loaded scripts', scripts)
     return (
-      <section className={style.normal}>
+      <section id='execution'>
         Execution View
       </section>
     )

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { addScript, editScript } from '../../ducks/scripts'
 const actions = { addScript, editScript }
 //  Styles
-import style from '../../styles/Settings.css'
+import '../../styles/Settings.css'
 
 @connect(
   state => ({
@@ -23,7 +23,7 @@ export default class Settings extends React.Component {
   render ({ scripts } = this.props) {
     console.log('Settings loaded scripts', scripts)
     return (
-      <section className={style.normal}>
+      <section id='settings'>
         Settings View
       </section>
     )

@@ -1,5 +1,10 @@
 /* Blueprint CSS */
-/* @import "~@blueprintjs/core"; */
+@import "~normalize.css/normalize.css";
+@import "~@blueprintjs/core/dist/blueprint.css";
+
+* {
+  color: red !important;
+}
 
 .normal {
   background: #fff;

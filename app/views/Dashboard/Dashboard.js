@@ -6,7 +6,9 @@ import { connect } from 'react-redux'
 import { addScript, editScript } from '../../ducks/scripts'
 const actions = { addScript, editScript }
 //  Styles
-import style from '../../styles/Dashboard.css'
+import '../../styles/Dashboard.css'
+
+import { Button } from '@blueprintjs/core'
 
 @connect(
   state => ({
@@ -23,9 +25,15 @@ export default class Dashboard extends React.Component {
   render ({ scripts } = this.props) {
     console.log('Dashboard loaded scripts', scripts)
     return (
-      <section className={style.normal}>
-        Dashboard View
+      <section id='dashboard'>
+        <Button iconName="refresh">TEST</Button>
+        <button className="pt-button pt-icon-refresh" type="button">TEST 2</button>
       </section>
     )
   }
 }
+/*
+<section className={style.normal}>
+  Dashboard View
+</section>
+*/
