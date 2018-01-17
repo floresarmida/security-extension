@@ -12,14 +12,9 @@ import '../../styles/Dashboard.css'
   state => ({
     scripts: state.scripts
   }),
-  dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
-  })
+  dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-export default class Dashboard extends React.Component {
-  // static propTypes = {
-  //   scripts: PropTypes.array.isRequired
-  // }
+class Dashboard extends React.Component {
   render ({ scripts } = this.props) {
     console.log('Dashboard loaded scripts', scripts)
     return (
@@ -29,8 +24,4 @@ export default class Dashboard extends React.Component {
     )
   }
 }
-/*
-<section className={style.normal}>
-  Dashboard View
-</section>
-*/
+export default Dashboard

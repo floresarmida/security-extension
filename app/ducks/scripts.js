@@ -1,3 +1,10 @@
+import cuid from 'cuid'
+/*
+CORE SCRIPTS
+These are scripts built into the extension that can be automatically executed
+*/
+import { findComments, getBoundFunctions, getGlobalState, getInlineValues, revealHiddenElements } from '../core/scripts'
+
 /*
 CONSTANTS
 */
@@ -26,15 +33,39 @@ export const clearExecuted = (id) => ({ type: CLEAR_EXECUTED, id })
 /*
 REDUCER
 */
-const initialState = [{
-  id: 0,
-  title: 'Basic Script',
-  description: 'Description Here',
-  target: 'https://rykeller.com',
-  executed: false
-}]
-
-//  TODO: Create an atomic function that can run stringified JS
+const initialState = [
+  {
+    id: cuid(),
+    title: 'Get Global State',
+    description: 'Description Here',
+    body: eval(getGlobalState),
+    executed: false
+  }, {
+    id: cuid(),
+    title: 'Find Inline Comments',
+    description: 'Description Here',
+    body: eval(findComments),
+    executed: false
+  }, {
+    id: cuid(),
+    title: 'Get Inline Form Values',
+    description: 'Description Here',
+    body: eval(getInlineValues),
+    executed: false
+  }, {
+    id: cuid(),
+    title: 'Get Bound Functions',
+    description: 'Description Here',
+    body: eval(getBoundFunctions),
+    executed: false
+  }, {
+    id: cuid(),
+    title: 'Reveal Hidden Elements',
+    description: 'Description Here',
+    body: eval(revealHiddenElements),
+    executed: false
+  }
+]
 
 const actionsMap = {
   [ADD_SCRIPT] (state, action) {
@@ -57,6 +88,7 @@ const actionsMap = {
   },
   [EXECUTE_SCRIPT] (state, action) {
     return state.map(script =>
+      // eval(script)()
       (script.id === action.id
         ? Object.assign({}, script, { executed: !script.executed })
         : script

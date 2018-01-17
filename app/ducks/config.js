@@ -8,15 +8,28 @@ const EDIT_CONFIG = 'EDIT_CONFIG'
 ACTIONS
 */
 export const changeView = (view) => ({ type: CHANGE_VIEW, view })
-export const editConfig = (id, text) => ({ type: EDIT_CONFIG, id, text })
+export const editConfig = (edits) => ({ type: EDIT_CONFIG, edits })
 
 /*
 REDUCER
 */
 const initialState = {
-  view: {},
-  defaultView: 'dashboard',
-  autoRun: false
+  view: 'dashboard',
+  autorun: false,
+  editor: {
+    theme: 'github',
+    fontSize: 16,
+    value: `function onLoad(editor) {
+  console.log('Loading complete!');
+}`,
+    options: {
+      enableBasicAutocompletion: true,
+      enableLiveAutocompletion: true,
+      enableSnippets: true,
+      showLineNumbers: true,
+      tabSize: 2
+    }
+  }
 }
 
 const actionsMap = {
@@ -24,7 +37,7 @@ const actionsMap = {
     return Object.assign({}, state, { view: action.view })
   },
   [EDIT_CONFIG] (state, action) {
-    return Object.assign({}, state, { ...action })
+    return Object.assign({}, state, { ...action.edits })
   }
 }
 

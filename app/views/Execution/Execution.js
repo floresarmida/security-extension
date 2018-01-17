@@ -12,9 +12,7 @@ import '../../styles/Execution.css'
   state => ({
     scripts: state.scripts
   }),
-  dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
-  })
+  dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 class Execution extends React.Component {
   // static propTypes = {

@@ -8,23 +8,41 @@ const actions = { addScript, editScript }
 //  Styles
 import '../../styles/Composition.css'
 
+import AceEditor from 'react-ace'
+
+import 'brace'
+import 'brace/mode/javascript'
+import 'brace/theme/github'
+import 'brace/theme/monokai'
+
 @connect(
   state => ({
-    scripts: state.scripts
+    scripts: state.scripts,
+    editor: state.config.editor
   }),
-  dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
-  })
+  dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 export default class Composition extends React.Component {
   // static propTypes = {
   //   scripts: PropTypes.array.isRequired
   // }
-  render ({ scripts } = this.props) {
-    console.log('Composition loaded scripts', scripts)
+  render ({ scripts, editor } = this.props) {
+    console.log('Composition loaded config', editor)
     return (
       <section>
-        Composition View
+        <AceEditor
+          name='composer'
+          mode='javascript'
+          theme={editor.theme}
+          // onLoad={this.onLoad}
+          // onChange={this.onChange}
+          fontSize={editor.fontSize}
+          setOptions={editor.options}
+          showPrintMargin
+          showGutter
+          highlightActiveLine
+          value={editor.value}
+        />
       </section>
     )
   }
