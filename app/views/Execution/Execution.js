@@ -16,16 +16,17 @@ import '../../styles/Execution.css'
     actions: bindActionCreators(actions, dispatch)
   })
 )
-export default class Execution extends React.Component {
+class Execution extends React.Component {
   // static propTypes = {
   //   scripts: PropTypes.array.isRequired
   // }
   render ({ scripts } = this.props) {
     console.log('Execution loaded scripts', scripts)
     return (
-      <section id='execution'>
-        Execution View
+      <section>
+        A view for running ad-hoc commands and assigning labels to scripts.
       </section>
     )
   }
 }
+export default Execution

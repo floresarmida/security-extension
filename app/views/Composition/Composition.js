@@ -23,7 +23,7 @@ export default class Composition extends React.Component {
   render ({ scripts } = this.props) {
     console.log('Composition loaded scripts', scripts)
     return (
-      <section id='composition'>
+      <section>
         Composition View
       </section>
     )

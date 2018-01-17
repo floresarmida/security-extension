@@ -6,6 +6,8 @@ import Composition from '../views/Composition/Composition'
 import Settings from '../views/Settings/Settings'
 import '../styles/App.css'
 
+import { Tabs2, Tab2 } from '@blueprintjs/core'
+
 @connect(
   state => ({
     view: state.config.view
@@ -25,14 +27,12 @@ export default class App extends Component {
   render () {
     // TODO: Switch statement for rendering view components
     return (
-      <article>
-        <div id='placeholder-for-tabs-component'>
-          <Dashboard />
-          <Execution />
-          <Composition />
-          <Settings />
-        </div>
-      </article>
+      <Tabs2 id='app' onChange={this.handleTabChange}>
+        <Tab2 id='dashboard' title='Dashboard' panel={<Dashboard />} />
+        <Tab2 id='execution' title='Execution' panel={<Execution />} />
+        <Tab2 id='composition' title='Composition' panel={<Composition />} />
+        <Tab2 id='settings' title='Settings' panel={<Settings />} />
+      </Tabs2>
     )
   }
 }

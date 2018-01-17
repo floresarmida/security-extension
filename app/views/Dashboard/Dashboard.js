@@ -8,8 +8,6 @@ const actions = { addScript, editScript }
 //  Styles
 import '../../styles/Dashboard.css'
 
-import { Button } from '@blueprintjs/core'
-
 @connect(
   state => ({
     scripts: state.scripts
@@ -25,9 +23,8 @@ export default class Dashboard extends React.Component {
   render ({ scripts } = this.props) {
     console.log('Dashboard loaded scripts', scripts)
     return (
-      <section id='dashboard'>
-        <Button iconName="refresh">TEST</Button>
-        <button className="pt-button pt-icon-refresh" type="button">TEST 2</button>
+      <section>
+        Includes at a glance metrics for the application, scripts that ran on this page, logged output, etc.
       </section>
     )
   }
