@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-//  Redux Actions
+
 import { changeView } from '../ducks/config'
-const actions = { changeView }
 
 import AppBar from 'material-ui/AppBar'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -12,15 +11,15 @@ import muiTheme from '../styles/MUI'
 import '../styles/App.css'
 
 import Dashboard from '../views/Dashboard/Dashboard'
-import Execution from '../views/Execution/Execution'
-import Composition from '../views/Composition/Composition'
+import Tasks from '../views/Tasks/Tasks'
+import Editor from '../views/Editor/Editor'
 import Settings from '../views/Settings/Settings'
 
 @connect(
   state => ({
     view: state.config.view
   }),
-  dispatch => ({ actions: bindActionCreators(actions, dispatch) })
+  dispatch => ({ actions: bindActionCreators({ changeView }, dispatch) })
 )
 class App extends Component {
   static propTypes = {
@@ -40,11 +39,11 @@ class App extends Component {
             <Tab value='dashboard' label='Dashboard' >
               <Dashboard />
             </Tab>
-            <Tab value='execution' label='Execution' >
-              <Execution />
+            <Tab value='tasks' label='Tasks' >
+              <Tasks />
             </Tab>
-            <Tab value='composition' label='Composition' >
-              <Composition test='test' />
+            <Tab value='editor' label='Editor' >
+              <Editor />
             </Tab>
             <Tab value='settings' label='Settings' >
               <Settings />

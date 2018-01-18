@@ -14,7 +14,7 @@ import '../../styles/Execution.css'
   }),
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-class Execution extends Component {
+class Editor extends Component {
   static propTypes = {
     scripts: PropTypes.array.isRequired
   }
@@ -27,4 +27,4 @@ class Execution extends Component {
     )
   }
 }
-export default Execution
+export default Editor

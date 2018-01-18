@@ -12,7 +12,7 @@ const ADD_SCRIPT = 'ADD_SCRIPT'
 const DELETE_SCRIPT = 'DELETE_SCRIPT'
 const EDIT_SCRIPT = 'EDIT_SCRIPT'
 const EXECUTE_SCRIPT = 'EXECUTE_SCRIPT'
-const EXECUTE_LABEL = 'EXECUTE_LABEL'
+const EXECUTE_GROUP = 'EXECUTE_GROUP'
 const CLEAR_EXECUTED = 'CLEAR_EXECUTED'
 //  Legacy
 export const SHOW_ALL = 'SHOW_ALL'
@@ -26,7 +26,7 @@ export const addScript = (title) => ({ type: ADD_SCRIPT, title })
 export const deleteScript = (id) => ({ type: DELETE_SCRIPT, id })
 export const editScript = (id, title) => ({ type: EDIT_SCRIPT, id, title })
 export const executeScript = (id) => ({ type: EXECUTE_SCRIPT, id })
-export const executeLabel = (label) => ({ type: EXECUTE_LABEL, label })
+export const executeGroup = (group) => ({ type: EXECUTE_GROUP, group })
 export const clearExecuted = (id) => ({ type: CLEAR_EXECUTED, id })
 //  clearAllExecuted
 
@@ -96,9 +96,9 @@ const actionsMap = {
     )
   },
   //  TODO: Refactor to include queries.
-  [EXECUTE_LABEL] (state, action) {
+  [EXECUTE_GROUP] (state, action) {
     return state.map(script =>
-      (script.label === action.label)
+      (script.group === action.group)
         ? Object.assign({}, script, { executed: !script.executed })
         : script
     )
