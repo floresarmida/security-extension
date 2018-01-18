@@ -19,16 +19,16 @@ const initialState = {
   editor: {
     theme: 'github',
     fontSize: 16,
-    value: `function onLoad(editor) {
-  console.log('Loading complete!');
-}`,
     options: {
       enableBasicAutocompletion: true,
       enableLiveAutocompletion: true,
       enableSnippets: true,
       showLineNumbers: true,
       tabSize: 2
-    }
+    },
+    value: `function onLoad(editor) {
+  console.log('Loading complete!');
+}`
   }
 }
 

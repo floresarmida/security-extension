@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 //  Redux Actions
@@ -22,13 +22,16 @@ import Settings from '../views/Settings/Settings'
   }),
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-class App extends Component {
+class App extends React.Component {
+  static propTypes = {
+    view: PropTypes.string.isRequired
+  }
   componentDidMount () {
     console.log('APP:', chrome)
   }
 
-  render ({ view, actions } = this.props) {
-    // TODO: Switch statement for rendering view components
+  render () {
+    const { view, actions } = this.props
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div id='body'>

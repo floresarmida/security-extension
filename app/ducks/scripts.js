@@ -38,31 +38,31 @@ const initialState = [
     id: cuid(),
     title: 'Get Global State',
     description: 'Description Here',
-    body: eval('getGlobalState'),
+    // body: eval('getGlobalState'),
     executed: false
   }, {
     id: cuid(),
     title: 'Find Inline Comments',
     description: 'Description Here',
-    body: eval('findComments'),
+    // body: eval('findComments'),
     executed: false
   }, {
     id: cuid(),
     title: 'Get Inline Form Values',
     description: 'Description Here',
-    body: eval('getInlineValues'),
+    // body: eval('getInlineValues'),
     executed: false
   }, {
     id: cuid(),
     title: 'Get Bound Functions',
     description: 'Description Here',
-    body: eval('getBoundFunctions'),
+    // body: eval('getBoundFunctions'),
     executed: false
   }, {
     id: cuid(),
     title: 'Reveal Hidden Elements',
     description: 'Description Here',
-    body: eval('revealHiddenElements'),
+    // body: eval('revealHiddenElements'),
     executed: false
   }
 ]
@@ -70,7 +70,7 @@ const initialState = [
 const actionsMap = {
   [ADD_SCRIPT] (state, action) {
     return [{
-      id: state.reduce((maxId, script) => Math.max(script.id, maxId), -1) + 1,
+      id: cuid(),
       executed: false,
       title: action.title
     }, ...state]

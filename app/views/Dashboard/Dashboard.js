@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 // import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -10,13 +10,16 @@ import '../../styles/Dashboard.css'
 
 @connect(
   state => ({
-    scripts: state.scripts
+    scripts: state.scripts || []
   }),
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 class Dashboard extends React.Component {
-  render ({ scripts } = this.props) {
-    console.log('Dashboard loaded scripts', scripts)
+  static propTypes = {
+    scripts: PropTypes.array.isRequired
+  }
+  render () {
+    const { scripts } = this.props
     return (
       <section>
         Includes at a glance metrics for the application, scripts that ran on this page, logged output, etc.

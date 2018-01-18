@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 // import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -15,11 +15,11 @@ import '../../styles/Execution.css'
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 class Execution extends React.Component {
-  // static propTypes = {
-  //   scripts: PropTypes.array.isRequired
-  // }
-  render ({ scripts } = this.props) {
-    console.log('Execution loaded scripts', scripts)
+  static propTypes = {
+    scripts: PropTypes.array.isRequired
+  }
+  render () {
+    const { scripts } = this.props
     return (
       <section>
         A view for running ad-hoc commands and assigning labels to scripts.

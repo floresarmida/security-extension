@@ -1,5 +1,4 @@
-import React from 'react'
-// import PropTypes from 'prop-types'
+import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 //  Redux Actions
@@ -14,15 +13,17 @@ import Toggle from 'material-ui/Toggle'
   state => {
     const { autorun } = state.config
     return {
-      scripts: state.scripts,
       autorun
     }
   },
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 class Settings extends React.Component {
-  render ({ scripts, autorun, actions } = this.props) {
-    console.log('Settings loaded scripts', scripts, actions)
+  static propTypes = {
+    autorun: PropTypes.bool.isRequired
+  }
+  render () {
+    const { autorun, actions } = this.props
     return (
       <section>
         <Toggle toggled={autorun}
