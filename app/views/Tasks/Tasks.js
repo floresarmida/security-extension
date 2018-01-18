@@ -6,21 +6,33 @@ import { connect } from 'react-redux'
 import { executeScript } from '../../ducks/scripts'
 import { scriptGroups } from '../../flux/selectors'
 //  Styles
-import '../../styles/Execution.css'
+import '../../styles/Tasks.css'
 
-import { Card, CardActions, CardTitle, CardHeader, CardText } from 'material-ui/Card'
-import { List, ListItem } from 'material-ui/List'
+import { Card, CardTitle } from 'material-ui/Card'
+import { List } from 'material-ui/List'
 import FlatButton from 'material-ui/FlatButton'
 
-import ActionInfo from 'material-ui/svg-icons/action/info';
-import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
-import Avatar from 'material-ui/Avatar';
-import FileFolder from 'material-ui/svg-icons/file/folder';
-import ActionAssignment from 'material-ui/svg-icons/action/assignment';
-import EditorInsertChart from 'material-ui/svg-icons/editor/insert-chart';
-
 import Script from './Script'
+
+const sample = {
+  'string': 'this is a test string',
+  'integer': 42,
+  'array': [
+    1,
+    2,
+    3,
+    'test',
+    null
+  ],
+  'float': 3.14159,
+  'object': {
+    'first-child': true,
+    'second-child': false,
+    'last-child': null
+  },
+  'string_number': '1234',
+  'date': '2018-01-18T03:52:38.533Z'
+}
 
 @connect(
   state => ({
@@ -45,26 +57,13 @@ class Editor extends Component {
       <section>
         {Object.keys(groups).map(key => (
           <Card key={key} style={{ marginBottom: 16 }}>
-            <CardTitle
-              title={key}
-              actAsExpander
-              showExpandableButton
-            />
-            <FlatButton primary fullWidth label={`Execute Group`} />
+            <CardTitle title={key} style={{ paddingBottom: 0 }}/>
             <List>
               {groups[key].map(script => (
-                <Script key={script.id} {...script} />
+                <Script key={script.id} {...script} output={sample} />
               ))}
             </List>
-            <CardText expandable >
-              <code>
-                [SCRIPT OUTPUT HERE]
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-              </code>
-            </CardText>
+            <FlatButton secondary fullWidth label={`Execute Group`} />
           </Card>
         ))}
       </section>

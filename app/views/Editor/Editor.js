@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 //  Redux Actions
 import { editConfig } from '../../ducks/config'
 //  Styles
-import '../../styles/Composition.css'
+import '../../styles/Editor.css'
 
 import AceEditor from 'react-ace'
 import 'brace'
