@@ -10,7 +10,7 @@ import '../../styles/Dashboard.css'
 
 @connect(
   state => ({
-    scripts: state.scripts || []
+    scripts: state.scripts
   }),
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
@@ -18,8 +18,12 @@ class Dashboard extends Component {
   static propTypes = {
     scripts: PropTypes.array.isRequired
   }
+  static defaultProps = {
+    scripts: []
+  }
   render () {
     const { scripts } = this.props
+    console.warn('DASHBOARD:', this.props)
     return (
       <section>
         Includes at a glance metrics for the application, scripts that ran on this page, logged output, etc.

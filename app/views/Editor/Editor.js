@@ -13,20 +13,21 @@ import 'brace/theme/github'
 import 'brace/theme/monokai'
 
 @connect(
-  state => {
-    const { editor } = state.config
-    return {
-      editor
-    }
-  },
+  state => ({
+    editor: state.config.editor
+  }),
   dispatch => ({ actions: bindActionCreators({ editConfig }, dispatch) })
 )
 class Editor extends Component {
   static propTypes = {
     editor: PropTypes.object.isRequired
   }
+  static defaultProps = {
+    editor: {}
+  }
   render () {
     const { editor } = this.props
+    console.warn('EDITOR:', this.props)
     return (
       <section>
         <AceEditor
@@ -38,7 +39,10 @@ class Editor extends Component {
           showPrintMargin
           showGutter
           highlightActiveLine
+          wrapEnabled
           value={editor.value}
+          width='100%'
+          height='400px'
           // onLoad={this.onLoad}
           // onChange={this.onChange}
         />

@@ -3,7 +3,7 @@ import cuid from 'cuid'
 CORE SCRIPTS
 These are scripts built into the extension that can be automatically executed
 */
-// import { findComments, getBoundFunctions, getGlobalState, getInlineValues, revealHiddenElements } from '../core/scripts'
+import { findComments, getBoundFunctions, getGlobalState, getInlineValues, revealHiddenElements } from '../core/scripts'
 
 /*
 CONSTANTS
@@ -36,34 +36,44 @@ REDUCER
 const initialState = [
   {
     id: cuid(),
+    group: 'Inspection',
     title: 'Get Global State',
     description: 'Description Here',
-    // body: eval('getGlobalState'),
-    executed: false
+    body: eval(getGlobalState),
+    executed: false,
+    output: ''
   }, {
     id: cuid(),
-    title: 'Find Inline Comments',
-    description: 'Description Here',
-    // body: eval('findComments'),
-    executed: false
-  }, {
-    id: cuid(),
+    group: 'Inspection',
     title: 'Get Inline Form Values',
     description: 'Description Here',
-    // body: eval('getInlineValues'),
-    executed: false
+    body: eval(getInlineValues),
+    executed: false,
+    output: ''
   }, {
     id: cuid(),
+    group: 'Inspection',
     title: 'Get Bound Functions',
     description: 'Description Here',
-    // body: eval('getBoundFunctions'),
-    executed: false
+    body: eval(getBoundFunctions),
+    executed: false,
+    output: ''
   }, {
     id: cuid(),
+    group: 'Static Analysis',
+    title: 'Find Inline Comments',
+    description: 'Description Here',
+    body: eval(findComments),
+    executed: false,
+    output: ''
+  }, {
+    id: cuid(),
+    group: 'Document Manipulation',
     title: 'Reveal Hidden Elements',
     description: 'Description Here',
-    // body: eval('revealHiddenElements'),
-    executed: false
+    body: eval(revealHiddenElements),
+    executed: false,
+    output: ''
   }
 ]
 
@@ -71,8 +81,12 @@ const actionsMap = {
   [ADD_SCRIPT] (state, action) {
     return [{
       id: cuid(),
+      group: 'Uncategorized',
+      title: action.title,
+      description: action.description,
+      body: eval(action.body),
       executed: false,
-      title: action.title
+      output: ''
     }, ...state]
   },
   [DELETE_SCRIPT] (state, action) {

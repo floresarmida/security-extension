@@ -10,20 +10,21 @@ import '../../styles/Settings.css'
 import Toggle from 'material-ui/Toggle'
 
 @connect(
-  state => {
-    const { autorun } = state.config
-    return {
-      autorun
-    }
-  },
+  state => ({
+    autorun: state.config.autorun
+  }),
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 class Settings extends Component {
   static propTypes = {
     autorun: PropTypes.bool.isRequired
   }
+  static defaultProps = {
+    autorun: false
+  }
   render () {
     const { autorun, actions } = this.props
+    console.warn('SETTINGS:', this.props)
     return (
       <section>
         <Toggle toggled={autorun}

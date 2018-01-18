@@ -16,6 +16,7 @@ REDUCER
 const initialState = {
   view: 'dashboard',
   autorun: false,
+  groups: ['Inspection', 'Static Analysis', 'Document Manipulation'],
   editor: {
     theme: 'github',
     fontSize: 16,
