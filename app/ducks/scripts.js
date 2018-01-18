@@ -56,7 +56,7 @@ const initialState = [
     id: cuid(),
     group: 'Inspection',
     title: 'Get Global State',
-    description: 'Description Here',
+    description: 'Unsecured top-level variables',
     body: getGlobalState,
     executed: false,
     output: ''
@@ -64,7 +64,7 @@ const initialState = [
     id: cuid(),
     group: 'Inspection',
     title: 'Get Inline Form Values',
-    description: 'Description Here',
+    description: 'Form IDs, hardcoded values, etc.',
     body: getInlineValues,
     executed: false,
     output: ''
@@ -72,7 +72,7 @@ const initialState = [
     id: cuid(),
     group: 'Inspection',
     title: 'Get Bound Functions',
-    description: 'Description Here',
+    description: 'Client-side events you can trigger, e.g. onClick(e)',
     body: getBoundFunctions,
     executed: false,
     output: ''
@@ -80,7 +80,7 @@ const initialState = [
     id: cuid(),
     group: 'Static Analysis',
     title: 'Find Inline Comments',
-    description: 'Description Here',
+    description: '',
     body: findComments,
     executed: false,
     output: ''
@@ -88,7 +88,7 @@ const initialState = [
     id: cuid(),
     group: 'Document Manipulation',
     title: 'Reveal Hidden Elements',
-    description: 'Description Here',
+    description: 'Forces hidden buttons to render, outlines them in red',
     body: revealHiddenElements,
     executed: false,
     output: ''

@@ -40,6 +40,8 @@ class Editor extends Component {
           showGutter
           highlightActiveLine
           wrapEnabled
+          collapsed={false}
+          displayDataTypes={false}
           value={editor.value}
           width='100%'
           height='400px'
