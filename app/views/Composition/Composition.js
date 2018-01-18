@@ -15,14 +15,17 @@ import '../../styles/Composition.css'
 // import 'brace/theme/monokai'
 
 @connect(
-  state => ({
-    config: state.config
-  }),
+  state => {
+    const { editor } = state.config
+    return {
+      editor
+    }
+  },
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
 class Composition extends React.Component {
   static propTypes = {
-    config: PropTypes.object.isRequired
+    editor: PropTypes.object.isRequired
   }
   render () {
     // const { config } = this.props
@@ -30,23 +33,24 @@ class Composition extends React.Component {
     return (
       <section>
         Placeholder for t/s
-        {/* {editor &&
-          <AceEditor
-            name='composer'
-            mode='javascript'
-            theme={editor.theme}
-            // onLoad={this.onLoad}
-            // onChange={this.onChange}
-            fontSize={editor.fontSize}
-            setOptions={editor.options}
-            showPrintMargin
-            showGutter
-            highlightActiveLine
-            value={editor.value}
-          />
-        } */}
       </section>
     )
   }
 }
 export default Composition
+
+/*
+<AceEditor
+  name='composer'
+  mode='javascript'
+  theme={editor.theme}
+  // onLoad={this.onLoad}
+  // onChange={this.onChange}
+  fontSize={editor.fontSize}
+  setOptions={editor.options}
+  showPrintMargin
+  showGutter
+  highlightActiveLine
+  value={editor.value}
+/>
+*/

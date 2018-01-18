@@ -44,7 +44,7 @@ class App extends React.Component {
               <Execution />
             </Tab>
             <Tab value='composition' label='Composition' >
-              <Composition />
+              <Composition test='test' />
             </Tab>
             <Tab value='settings' label='Settings' >
               <Settings />
