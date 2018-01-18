@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 // import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -14,7 +14,7 @@ import '../../styles/Execution.css'
   }),
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-class Execution extends React.Component {
+class Execution extends Component {
   static propTypes = {
     scripts: PropTypes.array.isRequired
   }

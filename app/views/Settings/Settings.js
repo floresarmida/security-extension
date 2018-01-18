@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 //  Redux Actions
@@ -18,7 +18,7 @@ import Toggle from 'material-ui/Toggle'
   },
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-class Settings extends React.Component {
+class Settings extends Component {
   static propTypes = {
     autorun: PropTypes.bool.isRequired
   }

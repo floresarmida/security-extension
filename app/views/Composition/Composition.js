@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 //  Redux Actions
@@ -23,7 +23,7 @@ import '../../styles/Composition.css'
   },
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-class Composition extends React.Component {
+class Composition extends Component {
   static propTypes = {
     editor: PropTypes.object.isRequired
   }
