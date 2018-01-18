@@ -46,21 +46,35 @@ const sample = {
 class Editor extends Component {
   static propTypes = {
     groups: PropTypes.object.isRequired
+    // actions: PropTypes.object.isRequired
   }
   static defaultProps = {
     groups: {}
   }
   render () {
-    const { groups } = this.props
-    console.warn('TASKS:', this.props, Object.keys(groups))
+    const { groups, actions } = this.props
+
+    // function EXECUTE (code) {
+    //   let results = []
+    //   chrome.tabs.executeScript(
+    //     { code: `(function(params) { ${code} })();` },
+    //     (output) => results.push(output[0] || output)
+    //   )
+    //   return results
+    // }
+    // console.warn('EXECUTE:', EXECUTE('return document.body.innerHTML;'))
+
+    let test = 'return document.body.innerHTML;'
+    // actions.executeScript(test)
+
     return (
       <section>
         {Object.keys(groups).map(key => (
           <Card key={key} style={{ marginBottom: 16 }}>
-            <CardTitle title={key} style={{ paddingBottom: 0 }}/>
+            <CardTitle title={key} style={{ paddingBottom: 0 }} />
             <List>
               {groups[key].map(script => (
-                <Script key={script.id} {...script} output={sample} />
+                <Script key={script.id} {...script} executeScript={actions.executeScript} />
               ))}
             </List>
             <FlatButton secondary fullWidth label={`Execute Group`} />

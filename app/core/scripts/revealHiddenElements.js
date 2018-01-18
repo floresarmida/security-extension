@@ -10,4 +10,5 @@ export default function revealHiddenElements (selector = '*') {
     e.hidden = false
     console.warn('Revealed Element:', e)
   }
+  return 'revealHiddenElements completed'
 }

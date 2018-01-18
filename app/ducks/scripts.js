@@ -31,6 +31,24 @@ export const clearExecuted = (id) => ({ type: CLEAR_EXECUTED, id })
 //  clearAllExecuted
 
 /*
+Middlewares
+*/
+//  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
+//  TODO: Turn this into a thunk
+function EXECUTE (code) {
+  let results = []
+  chrome.tabs.executeScript(
+    { code: `(function(params) { ${code} })();` },
+    (output) => {
+      // console.warn('SECURITY EXTENSION OUTPUT:', output)
+      results.push(output[0] || output || null)
+      return output
+    }
+  )
+  return results
+}
+
+/*
 REDUCER
 */
 const initialState = [
@@ -101,13 +119,16 @@ const actionsMap = {
     )
   },
   [EXECUTE_SCRIPT] (state, action) {
-    return state.map(script =>
-      // eval(script)()
-      (script.id === action.id
-        ? Object.assign({}, script, { executed: !script.executed })
-        : script
-      )
-    )
+    return state.map(script => {
+      if (script.id === action.id) {
+        console.warn('EXECUTE_SCRIPT in', script.title, script.id)
+        const output = EXECUTE('return document.body.innerHTML;')
+        console.log('EXECUTE_SCRIPT out', output)
+        return Object.assign({}, script, { executed: true, output })
+      } else {
+        return script
+      }
+    })
   },
   //  TODO: Refactor to include queries.
   [EXECUTE_GROUP] (state, action) {

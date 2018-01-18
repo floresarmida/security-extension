@@ -9,5 +9,5 @@ export default function getGlobalState () {
     for (var w in window) { if (standardGlobals.indexOf(w) == -1) $appSpecificGlobals[w] = window[w] } window.$appSpecificGlobals = $appSpecificGlobals; console.log(window.$appSpecificGlobals)
   }
   */
-  return {}
+  return 'getGlobalState executed'
 }
