@@ -21,32 +21,32 @@ export const SHOW_ACTIVE = 'SHOW_ACTIVE'
 
 /*
 ACTIONS
+Anonymous Functions: Asyncronous, returns an action creator
+Normal Functions: Are "Thunks", AKA functions that return a function that gets resolved by middleware. Used for async actions.
+
 */
 export const addScript = (title) => ({ type: ADD_SCRIPT, title })
 export const deleteScript = (id) => ({ type: DELETE_SCRIPT, id })
 export const editScript = (id, title) => ({ type: EDIT_SCRIPT, id, title })
-export const executeScript = (id) => ({ type: EXECUTE_SCRIPT, id })
+//  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
+export const executeScript = (id, body) => {
+  return function (dispatch) {
+    // const test = 'return document.body.innerHTML;'
+    try {
+      chrome.tabs.executeScript(
+        { code: `(function(params) { ${body} })();` },
+        (output) => {
+          dispatch({ type: EXECUTE_SCRIPT, id, output: output[0] || output })
+        }
+      )
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
 export const executeGroup = (group) => ({ type: EXECUTE_GROUP, group })
 export const clearExecuted = (id) => ({ type: CLEAR_EXECUTED, id })
 //  clearAllExecuted
-
-/*
-Middlewares
-*/
-//  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
-//  TODO: Turn this into a thunk
-function EXECUTE (code) {
-  let results = []
-  chrome.tabs.executeScript(
-    { code: `(function(params) { ${code} })();` },
-    (output) => {
-      // console.warn('SECURITY EXTENSION OUTPUT:', output)
-      results.push(output[0] || output || null)
-      return output
-    }
-  )
-  return results
-}
 
 /*
 REDUCER
@@ -57,7 +57,7 @@ const initialState = [
     group: 'Inspection',
     title: 'Get Global State',
     description: 'Description Here',
-    body: eval(getGlobalState),
+    body: getGlobalState,
     executed: false,
     output: ''
   }, {
@@ -65,7 +65,7 @@ const initialState = [
     group: 'Inspection',
     title: 'Get Inline Form Values',
     description: 'Description Here',
-    body: eval(getInlineValues),
+    body: getInlineValues,
     executed: false,
     output: ''
   }, {
@@ -73,7 +73,7 @@ const initialState = [
     group: 'Inspection',
     title: 'Get Bound Functions',
     description: 'Description Here',
-    body: eval(getBoundFunctions),
+    body: getBoundFunctions,
     executed: false,
     output: ''
   }, {
@@ -81,7 +81,7 @@ const initialState = [
     group: 'Static Analysis',
     title: 'Find Inline Comments',
     description: 'Description Here',
-    body: eval(findComments),
+    body: findComments,
     executed: false,
     output: ''
   }, {
@@ -89,7 +89,7 @@ const initialState = [
     group: 'Document Manipulation',
     title: 'Reveal Hidden Elements',
     description: 'Description Here',
-    body: eval(revealHiddenElements),
+    body: revealHiddenElements,
     executed: false,
     output: ''
   }
@@ -102,7 +102,7 @@ const actionsMap = {
       group: 'Uncategorized',
       title: action.title,
       description: action.description,
-      body: eval(action.body),
+      body: action.body,
       executed: false,
       output: ''
     }, ...state]
@@ -119,22 +119,17 @@ const actionsMap = {
     )
   },
   [EXECUTE_SCRIPT] (state, action) {
-    return state.map(script => {
-      if (script.id === action.id) {
-        console.warn('EXECUTE_SCRIPT in', script.title, script.id)
-        const output = EXECUTE('return document.body.innerHTML;')
-        console.log('EXECUTE_SCRIPT out', output)
-        return Object.assign({}, script, { executed: true, output })
-      } else {
-        return script
-      }
-    })
+    return state.map(script =>
+      (script.id === action.id)
+        ? Object.assign({}, script, { executed: true, output: action.output })
+        : script
+    )
   },
   //  TODO: Refactor to include queries.
   [EXECUTE_GROUP] (state, action) {
     return state.map(script =>
       (script.group === action.group)
-        ? Object.assign({}, script, { executed: !script.executed })
+        ? Object.assign({}, script, { executed: true })
         : script
     )
   },

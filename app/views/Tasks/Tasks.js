@@ -54,19 +54,6 @@ class Editor extends Component {
   render () {
     const { groups, actions } = this.props
 
-    // function EXECUTE (code) {
-    //   let results = []
-    //   chrome.tabs.executeScript(
-    //     { code: `(function(params) { ${code} })();` },
-    //     (output) => results.push(output[0] || output)
-    //   )
-    //   return results
-    // }
-    // console.warn('EXECUTE:', EXECUTE('return document.body.innerHTML;'))
-
-    let test = 'return document.body.innerHTML;'
-    // actions.executeScript(test)
-
     return (
       <section>
         {Object.keys(groups).map(key => (

@@ -6,14 +6,14 @@ import ActionInfo from 'material-ui/svg-icons/action/info'
 
 import JsonView from 'react-json-view'
 
-const Script = ({ executeScript, id, title, description, executed, output }) => (
+const Script = ({ executeScript, id, title, description, body, executed, output }) => (
   <div>
     <ListItem
       primaryText={title}
       secondaryText={description}
       disabled={false}
       leftCheckbox={<Checkbox disabled={false}
-        onClick={() => executeScript(id)}
+        onClick={() => executeScript(id, body)}
       />}
       rightIcon={<ActionInfo />}
       style={{ paddingBottom: 4 }}
