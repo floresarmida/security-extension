@@ -55,7 +55,8 @@ const baseDevConfig = () => ({
       query: {
         presets: ['react-hmre']
       }
-    }, {
+    },
+    {
       test: /\.css$/,
       loaders: [
         'style',

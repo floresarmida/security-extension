@@ -21,6 +21,16 @@ class Dashboard extends Component {
   static defaultProps = {
     scripts: []
   }
+  componentDidMount () {
+    const text = 'test'
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, { data: text }, function (response) {
+        // $('#status').html('changed data in page');
+        console.log('success')
+      })
+    })
+  }
+
   render () {
     const { scripts } = this.props
     console.warn('DASHBOARD:', this.props)
