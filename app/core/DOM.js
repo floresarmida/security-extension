@@ -21,15 +21,15 @@ export async function EVALUATE (script) {
     return new Promise((resolve, reject) => {
       chrome.tabs.query(content, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, command, (response) => {
-          resolve(response)
+          resolve(response || {})
         })
       })
     })
   }
   try {
-    const response = await sendScript(script)
+    const { success, response } = await sendScript(script)
     console.warn('Script | Response:', `\n${script}\n`, response)
-    return { success: true, response }
+    return { success, response }
   } catch (err) {
     console.error('Script | Failure:', `\n${script}\n`, err)
     return { success: false, response: err }

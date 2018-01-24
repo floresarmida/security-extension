@@ -35,7 +35,7 @@ export const executeScript = (id, body) => {
     //  TODO: Async/await?
     let { success, response: output } = await EVALUATE(body)
     if (typeof output !== 'object') output = [output]
-    // console.warn('executeScript', success, output)
+    console.warn('executeScript', success, output)
     success
       ? dispatch({ type: EXECUTE_SCRIPT, id, output })
       : dispatch({ type: EXECUTE_SCRIPT, id, output })
