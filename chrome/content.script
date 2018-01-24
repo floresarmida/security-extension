@@ -1,9 +1,30 @@
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log('something happening from the extension')
-  var data = request.data || {}
-  var linksList = document.querySelectorAll('a');
-  [].forEach.call(linksList, function (header) {
-    header.innerHTML = request.data
-  })
-  sendResponse({data: data, success: true})
+/*
+CONTENT SCRIPT - gets added to raw pages
+Do NOT modify, or change the file extension.
+This contains an event listener added directly to a site's DOM.
+The execution environment IS the website itself.
+This serves as a means of communicating w/ our extension via listeners.
+*/
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  console.warn('==SECURITY EXTENSION REQUEST==\n', request)
+  const { type, body } = request || {}
+  const { id } = sender || {}
+  try {
+    let response
+    switch (type) {
+      case 'script':
+        response = eval(`(function(params) { ${body} })();`)
+        sendResponse({ success: true, response })
+        break
+      case 'import':
+        response = 'Import a package script placeholder'
+        sendResponse({ success: true, response })
+        break
+      default:
+        response = 'Error: Unknown command'
+        sendResponse({ success: false, response })
+    }
+  } catch (err) {
+    sendResponse({ success: false, response: err })
+  }
 })
