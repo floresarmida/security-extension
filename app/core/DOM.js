@@ -14,15 +14,23 @@ const content = { active: true, currentWindow: true }
 /*
 EVALUATE: Run a script
 */
-export function EVALUATE (script) {
-  try {
-    chrome.tabs.query(content, (tabs) => {
-      const command = { type: 'script', body: script }
-      chrome.tabs.sendMessage(tabs[0].id, command, (response) => {
-        console.warn('Script | Response:', `\n${script}\n`, response)
-        return { success: true, response }
+export async function EVALUATE (script) {
+  //  Promise wrapper, handles async
+  function sendScript (script) {
+    const command = { type: 'script', body: script }
+    return new Promise((resolve, reject) => {
+      chrome.tabs.query(content, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, command, (response) => {
+          console.warn('Script | Response:', `\n${script}\n`, response)
+          resolve(response)
+        })
       })
     })
+  }
+  try {
+    const response = await sendScript(script)
+    console.log('EVALUATE RESPONSE', response)
+    return { success: true, response }
   } catch (err) {
     console.error('Script | Failure:', `\n${script}\n`, err)
     return { success: false, response: err }
