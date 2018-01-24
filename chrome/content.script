@@ -6,7 +6,7 @@ The execution environment IS the website itself.
 This serves as a means of communicating w/ our extension via listeners.
 */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.warn('==SECURITY EXTENSION REQUEST==\n', request)
+  console.log('==SECURITY EXTENSION REQUEST==\n', request)
   const { type, body } = request || {}
   const { id } = sender || {}
   try {

@@ -24,7 +24,6 @@ class Settings extends Component {
   }
   render () {
     const { autorun, actions } = this.props
-    console.warn('SETTINGS:', this.props)
     return (
       <section>
         <Toggle toggled={autorun}

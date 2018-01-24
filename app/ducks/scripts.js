@@ -31,14 +31,15 @@ export const deleteScript = (id) => ({ type: DELETE_SCRIPT, id })
 export const editScript = (id, title) => ({ type: EDIT_SCRIPT, id, title })
 //  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
 export const executeScript = (id, body) => {
+  console.log('executeScript runs')
   return function (dispatch) {
     //  TODO: Async/await?
-    let { success, response } = EVALUATE(body)
-    if (typeof response !== 'object') response = [response]
-    console.error('executeScript', success, response)
+    let { success, response: output } = EVALUATE(body)
+    if (typeof output !== 'object') output = [output]
+    console.warn('executeScript', success, output)
     success
-      ? dispatch({ type: EXECUTE_SCRIPT, id, output: response })
-      : dispatch({ type: EXECUTE_SCRIPT, id, output: response })
+      ? dispatch({ type: EXECUTE_SCRIPT, id, output })
+      : dispatch({ type: EXECUTE_SCRIPT, id, output })
   }
 }
 export const executeGroup = (group) => ({ type: EXECUTE_GROUP, group })

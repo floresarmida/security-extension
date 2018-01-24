@@ -27,7 +27,6 @@ class Editor extends Component {
   }
   render () {
     const { editor } = this.props
-    console.warn('EDITOR:', this.props)
     return (
       <section>
         <AceEditor

@@ -23,7 +23,6 @@ class Dashboard extends Component {
   }
   render () {
     const { scripts } = this.props
-    console.warn('DASHBOARD:', this.props)
     return (
       <section>
         Includes at a glance metrics for the application, scripts that ran on this page, logged output, etc.
