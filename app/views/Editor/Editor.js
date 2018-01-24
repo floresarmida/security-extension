@@ -14,34 +14,37 @@ import 'brace/theme/monokai'
 
 @connect(
   state => ({
-    editor: state.config.editor
+    // editor: state.config.editor
+    settings: state.editor.settings,
+    input: state.editor.input,
+    output: state.editor.output,
+    packages: state.editor.packages
   }),
   dispatch => ({ actions: bindActionCreators({ editConfig }, dispatch) })
 )
 class Editor extends Component {
   static propTypes = {
-    editor: PropTypes.object.isRequired
+    settings: PropTypes.object.isRequired
   }
   static defaultProps = {
-    editor: {}
+    settings: {}
   }
-  render () {
-    const { editor } = this.props
+  render ({ input, output, settings: { theme, fontSize, options } } = this.props) {
     return (
       <section>
         <AceEditor
           name='composer'
           mode='javascript'
-          theme={editor.theme}
-          fontSize={editor.fontSize}
-          setOptions={editor.options}
+          theme={theme}
+          fontSize={fontSize}
+          setOptions={options}
           showPrintMargin
           showGutter
           highlightActiveLine
           wrapEnabled
           collapsed={false}
           displayDataTypes={false}
-          value={editor.value}
+          value={input}
           width='100%'
           height='400px'
           // onLoad={this.onLoad}

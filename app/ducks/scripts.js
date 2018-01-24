@@ -12,7 +12,8 @@ CONSTANTS
 const ADD_SCRIPT = 'ADD_SCRIPT'
 const DELETE_SCRIPT = 'DELETE_SCRIPT'
 const EDIT_SCRIPT = 'EDIT_SCRIPT'
-const EXECUTE_SCRIPT = 'EXECUTE_SCRIPT'
+const SCRIPT_EXECUTED_SUCCESS = 'SCRIPT_EXECUTED_SUCCESS'
+const SCRIPT_EXECUTED_FAILURE = 'SCRIPT_EXECUTED_FAILURE'
 const EXECUTE_GROUP = 'EXECUTE_GROUP'
 const CLEAR_EXECUTED = 'CLEAR_EXECUTED'
 //  Legacy
@@ -37,8 +38,8 @@ export const executeScript = (id, body) => {
     if (typeof output !== 'object') output = [output]
     console.warn('executeScript', success, output)
     success
-      ? dispatch({ type: EXECUTE_SCRIPT, id, output })
-      : dispatch({ type: EXECUTE_SCRIPT, id, output })
+      ? dispatch({ type: SCRIPT_EXECUTED_SUCCESS, id, output })
+      : dispatch({ type: SCRIPT_EXECUTED_FAILURE, id, output })
   }
 }
 export const executeGroup = (group) => ({ type: EXECUTE_GROUP, group })
@@ -115,7 +116,15 @@ const actionsMap = {
       )
     )
   },
-  [EXECUTE_SCRIPT] (state, action) {
+  [SCRIPT_EXECUTED_SUCCESS] (state, action) {
+    return state.map(script =>
+      (script.id === action.id)
+        ? Object.assign({}, script, { executed: true, output: action.output })
+        : script
+    )
+  },
+  [SCRIPT_EXECUTED_FAILURE] (state, action) {
+    //  Code is identical for now
     return state.map(script =>
       (script.id === action.id)
         ? Object.assign({}, script, { executed: true, output: action.output })
