@@ -7,25 +7,37 @@ This serves as a means of communicating w/ our extension via listeners.
 */
 function INJECT_SCRIPT (script) {
   //  https://stackoverflow.com/questions/30197155/wait-for-an-async-callback-to-finish-before-completing-separate-function-in-java
-  var code = `(function () {
-    const evaluate = new Promise((resolve, reject) => {
-      var output = (function () { ${script} })()
-      resolve(output)
+  //  https://stackoverflow.com/questions/8578617/inject-a-script-tag-with-remote-src-and-wait-for-it-to-execute
+  /*
+  Proposed flow:
+  - Add an event listener awaiting a script value
+  - Inject said script
+    - Include an event that returns said value
+    - on value, return the data
+  */
+  function inject () {
+    return new Promise((resolve, reject) => {
+      var element = document.createElement('script');
+      element.async = true;
+      // element.src = src;
+      element.textContent = `var OUTPUT = (function () { ${script} })();`
+      element.addEventListener('load', resolve(OUTPUT));
+      element.addEventListener('error', () => reject('Error loading script.'));
+      element.addEventListener('abort', () => reject('Script loading aborted.'));
+      (document.head || document.documentElement).appendChild(injection);
+    });
+  }
+  inject(script)
+    .then(result => {
+      console.warn('inject(script) result:', result)
+      const event = document.createEvent('CustomEvent')
+      event.initCustomEvent('INJECT_SCRIPT', true, true, result)
+      window.dispatchEvent(event)
     })
-    evaluate
-        .then((result) => {
-          console.log('Callback got result', result)
-          const event = document.createEvent('CustomEvent')
-          event.initCustomEvent('INJECT_SCRIPT', true, true, result)
-          window.dispatchEvent(event)
-        })
-  })();`
-
-  var injection = document.createElement('script')
-  injection.textContent = code;
-  (document.head || document.documentElement).appendChild(injection)
-  injection.remove()
-  console.log('INJECT_SCRIPT COMPLETED')
+    .then(() => {
+      console.log('TODO: removal of tag via promise')
+      // injection.remove()
+    })
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
