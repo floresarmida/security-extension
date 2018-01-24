@@ -7,5 +7,6 @@ const globals = {}
 for (const w in window) {
   if (!standardGlobals.includes(w)) globals[w] = window[w]
 }
+console.warn(globals)
 return globals
 `

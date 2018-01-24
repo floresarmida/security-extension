@@ -5,39 +5,58 @@ This contains an event listener added directly to a site's DOM.
 The execution environment IS the website itself.
 This serves as a means of communicating w/ our extension via listeners.
 */
-function INJECT_SCRIPT (script, callback) {
-  var code = `var RESULT = (function() { ${script} })();`
+function INJECT_SCRIPT (script) {
+  //  https://stackoverflow.com/questions/30197155/wait-for-an-async-callback-to-finish-before-completing-separate-function-in-java
+  var code = `(function () {
+    const evaluate = new Promise((resolve, reject) => {
+      var output = (function () { ${script} })()
+      resolve(output)
+    })
+    evaluate
+        .then((result) => {
+          console.log('Callback got result', result)
+          const event = document.createEvent('CustomEvent')
+          event.initCustomEvent('INJECT_SCRIPT', true, true, result)
+          window.dispatchEvent(event)
+        })
+  })();`
 
   var injection = document.createElement('script')
   injection.textContent = code;
   (document.head || document.documentElement).appendChild(injection)
   injection.remove()
-  return RESULT
+  console.log('INJECT_SCRIPT COMPLETED')
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log('==SECURITY EXTENSION REQUEST==\n', request)
   const { type, body } = request || {}
   const { id } = sender || {}
+  let response
   try {
-    let response
     switch (type) {
       case 'script':
         // response = eval(`(function() { ${body} })();`)
-        response = INJECT_SCRIPT(body)
-        console.log('RESULTS IN CONTENT.SCRIPT', response)
-        sendResponse({ success: true, response })
+        console.log('INJECTING')
+        window.addEventListener('INJECT_SCRIPT', e => {
+          console.warn('SCRIPT INJECTED', e)
+          sendResponse({ success: true, response: e.detail })
+        })
+        INJECT_SCRIPT(body)
+        // console.log('RESULTS IN CONTENT.SCRIPT', response)
+        // sendResponse({ success: true, response })
         break
       case 'import':
         response = 'Import a package script placeholder'
         sendResponse({ success: true, response })
         break
-      default:
-        response = 'Error: Unknown command'
-        sendResponse({ success: false, response })
+      // default:
+      //   response = 'Error: Unknown command'
+      //   sendResponse({ success: false, response })
     }
   } catch (err) {
-    sendResponse({ success: false, response: err })
+    response = { 'ERROR': err.message }
+    sendResponse({ success: false, response })
   }
 })
 
