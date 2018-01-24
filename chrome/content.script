@@ -5,6 +5,16 @@ This contains an event listener added directly to a site's DOM.
 The execution environment IS the website itself.
 This serves as a means of communicating w/ our extension via listeners.
 */
+function INJECT_SCRIPT (script, callback) {
+  var code = `var RESULT = (function() { ${script} })();`
+
+  var injection = document.createElement('script')
+  injection.textContent = code;
+  (document.head || document.documentElement).appendChild(injection)
+  injection.remove()
+  return RESULT
+}
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log('==SECURITY EXTENSION REQUEST==\n', request)
   const { type, body } = request || {}
@@ -13,8 +23,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let response
     switch (type) {
       case 'script':
-        response = eval(`(function() { ${body} })();`)
-        // console.log('CONTENT SCRIPT RES', response)
+        // response = eval(`(function() { ${body} })();`)
+        response = INJECT_SCRIPT(body)
+        console.log('RESULTS IN CONTENT.SCRIPT', response)
         sendResponse({ success: true, response })
         break
       case 'import':
@@ -29,3 +40,41 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendResponse({ success: false, response: err })
   }
 })
+
+//  Resume sandbox testing for this:
+/*
+function INJECT_SCRIPT (script) {
+  //  Create a script element on the target dom with a self executing function
+  //  Add an event listener that returns the result. Remove the evidence.
+  const scr = document.createElement('script')
+  scr.textContent = `(function () {
+    const result = (function () { ${script} })();
+    const event = document.createEvent('CustomEvent');
+    event.initCustomEvent('INJECT_SCRIPT', true, true, result);
+    window.dispatchEvent(event);
+  })();`;
+  (document.head || document.documentElement).appendChild(scr)
+  scr.parentNode.removeChild(scr)
+}
+
+//  Listen for the response
+window.addEventListener('INJECT_SCRIPT', e => {
+  const response = e.detail
+  console.log('RESPONSE', response)
+})
+
+//  TEST
+INJECT_SCRIPT('return 9001;')
+*/
+
+/*
+var actualCode = `
+var someFixedRandomValue = ${Math.random()};
+console.warn(someFixedRandomValue);
+`;
+
+var script = document.createElement('script');
+script.textContent = actualCode;
+(document.head||document.documentElement).appendChild(script);
+script.remove();
+*/

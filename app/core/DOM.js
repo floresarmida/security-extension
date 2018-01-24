@@ -21,7 +21,7 @@ export async function EVALUATE (script) {
     return new Promise((resolve, reject) => {
       chrome.tabs.query(content, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, command, (response) => {
-          resolve(response || {})
+          resolve(response || { ERROR: 'Function timed out or had no return value' })
         })
       })
     })
