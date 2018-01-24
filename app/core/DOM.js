@@ -20,10 +20,12 @@ export function EVALUATE (script) {
       const command = { type: 'script', body: script }
       chrome.tabs.sendMessage(tabs[0].id, command, (response) => {
         console.warn('Script | Response:', `\n${script}\n`, response)
+        return { success: true, response }
       })
     })
   } catch (err) {
     console.error('Script | Failure:', `\n${script}\n`, err)
+    return { success: false, response: err }
   }
 }
 

@@ -4,6 +4,7 @@ CORE SCRIPTS
 These are scripts built into the extension that can be automatically executed
 */
 import { findComments, getBoundFunctions, getGlobalState, getInlineValues, revealHiddenElements } from '../core/scripts'
+import { EVALUATE } from '../core/DOM'
 
 /*
 CONSTANTS
@@ -31,17 +32,13 @@ export const editScript = (id, title) => ({ type: EDIT_SCRIPT, id, title })
 //  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
 export const executeScript = (id, body) => {
   return function (dispatch) {
-    // const test = 'return document.body.innerHTML;'
-    try {
-      chrome.tabs.executeScript(
-        { code: `(function(params) { ${body} })();` },
-        (output) => {
-          dispatch({ type: EXECUTE_SCRIPT, id, output: output[0] || output })
-        }
-      )
-    } catch (err) {
-      console.error(err)
-    }
+    //  TODO: Async/await?
+    let { success, response } = EVALUATE(body)
+    if (typeof response !== 'object') response = [response]
+    console.error('executeScript', success, response)
+    success
+      ? dispatch({ type: EXECUTE_SCRIPT, id, output: response })
+      : dispatch({ type: EXECUTE_SCRIPT, id, output: response })
   }
 }
 export const executeGroup = (group) => ({ type: EXECUTE_GROUP, group })
