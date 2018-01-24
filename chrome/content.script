@@ -13,8 +13,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     let response
     switch (type) {
       case 'script':
-        response = eval(`(function(params) { ${body} })();`)
-        console.log('CONTENT SCRIPT RES', response)
+        response = eval(`(function() { ${body} })();`)
+        // console.log('CONTENT SCRIPT RES', response)
         sendResponse({ success: true, response })
         break
       case 'import':

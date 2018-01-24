@@ -16,12 +16,11 @@ EVALUATE: Run a script
 */
 export async function EVALUATE (script) {
   //  Promise wrapper, handles async
-  function sendScript (script) {
-    const command = { type: 'script', body: script }
+  function sendScript (body) {
+    const command = { type: 'script', body }
     return new Promise((resolve, reject) => {
       chrome.tabs.query(content, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, command, (response) => {
-          console.warn('Script | Response:', `\n${script}\n`, response)
           resolve(response)
         })
       })
@@ -29,7 +28,7 @@ export async function EVALUATE (script) {
   }
   try {
     const response = await sendScript(script)
-    console.log('EVALUATE RESPONSE', response)
+    console.warn('Script | Response:', `\n${script}\n`, response)
     return { success: true, response }
   } catch (err) {
     console.error('Script | Failure:', `\n${script}\n`, err)
