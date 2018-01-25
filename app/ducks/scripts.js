@@ -4,7 +4,7 @@ CORE SCRIPTS
 These are scripts built into the extension that can be automatically executed
 */
 import { findComments, getBoundFunctions, getGlobalState, getInlineValues, revealHiddenElements } from '../core/scripts'
-import { EVALUATE } from '../core/DOM'
+import { RAW_DOM_INJECTION } from '../core/DOM'
 
 /*
 CONSTANTS
@@ -37,9 +37,19 @@ export const executeScript = (id, body) => {
       const tabs = await chrome.tabs
         .query({ active: true, currentWindow: true })
       const activeTab = tabs[0].id
-      const asyncScript = `() => new Promise((RETURN, ERROR) => { ${body} })`
+      // const asyncScript = `() => new Promise((RETURN, ERROR) => { ${body} })`
+      // const asyncScript = RAW_DOM_INJECTION
+      /*
+      EXECUTION ENVIRONMENT (traverses several worlds)
+      BACKGROUND -> CONTENT SCRIPT
+      CONTENT SCRIPT -> RAW DOM
+      RAW DOM -> CONTENT SCRIPT
+      CONTENT SCRIPT -> BACKGROUND
+      */
+      console.log('Received activeTab', activeTab)
       const results = await chrome
-        .tabs.executeAsyncFunction(activeTab, asyncScript)
+        .tabs.executeAsyncFunction(activeTab, RAW_DOM_INJECTION, body)
+        // .tabs.executeAsyncFunction(activeTab, asyncScript)
       console.warn('BACKGROUND RESULTS RECEIVED', results)
       results
         ? dispatch({ type: SCRIPT_EXECUTED_SUCCESS, id, output: results })

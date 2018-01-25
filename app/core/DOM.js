@@ -8,27 +8,47 @@ Usage:
 
 */
 
-//  Site contains config options, we're executing from the current tab
-const content = { active: true, currentWindow: true }
-
 /*
 EVALUATE: Run a script
+NOTE: This may be wrapped in string literals, so don't use `these`
 */
-export function EVALUATE (script) {
+export const RAW_DOM_INJECTION = `
+  function RAW_DOM_INJECTION (script) {
+  // console.warn('RAW_DOM_INJECTION', typeof Promise)
   return new Promise((resolve, reject) => {
-    const command = { type: 'script', body: script }
+    const TEST = {
+      id: 'ccc',
+      title: 'Test C',
+      body: 'setTimeout(() => RETURN(3), 1000);'
+    }
+    const { id, title, body } = TEST
+    console.warn('RAW_DOM_INJECTION', typeof Promise)
     try {
-      chrome.tabs.query(content, (tabs) => {
-        chrome.tabs.sendMessage(tabs[0].id, command, (response) => {
-          resolve(response || { ERROR: 'Function timed out or had no return value' })
-        })
-      })
-    } catch (err) {
-      console.error('Script | Failure:', `\n${script}\n`, err)
-      resolve({ success: false, response: err })
+      /* EXECUTION ENVIRONMENT: RAW DOM -> CONTENT SCRIPT */
+      window.addEventListener(id, (e) => {
+        /* EXECUTION ENVIRONMENT: CONTENT SCRIPT -> BACKGROUND (EXTENSION) */
+        const { detail } = e
+        resolve({ success: true, response: detail })
+      }, { once: true })
+      /* EXECUTION ENVIRONMENT: CONTENT SCRIPT -> RAW DOM */
+      const element = document.createElement('script')
+      element.textContent = '(async function () {' +
+        'const execution = () => new Promise((RETURN, ERROR) => { ' + body + ' });' +
+        'let response = await execution();' +
+        'var event = document.createEvent("CustomEvent");' +
+        'event.initCustomEvent("' + id + '", true, true, response);' +
+        'window.dispatchEvent(event);' +
+      '})();';
+      /* EXECUTION ENVIRONMENT: CONTENT SCRIPT -> RAW DOM */
+      (document.head || document.documentElement).appendChild(element)
+      element.parentNode.removeChild(element)
+    } catch (ERROR) {
+      console.error(ERROR)
+      resolve({ success: false, response: { ERROR } })
     }
   })
 }
+`
 
 /*
 //  How to do this with executeScript in case we need to:
