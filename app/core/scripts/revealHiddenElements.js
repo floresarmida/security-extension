@@ -13,5 +13,5 @@ for (let e of hidden) {
   const tag = JSON.stringify(e, ['id', 'className', 'tagName'])
   output.push(JSON.parse(tag))
 }
-return output
+RETURN(output)
 `

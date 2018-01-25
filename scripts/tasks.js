@@ -19,6 +19,4 @@ exports.copyAssets = (type) => {
   cp(`chrome/manifest.${env}.json`, `${type}/manifest.json`)
   cp('-R', 'chrome/assets/*', type)
   exec(`pug -O "{ env: '${env}' }" -o ${type} chrome/views/`)
-  //  Copy content script
-  cp(`chrome/content.script`, `${type}/content.js`)
 }

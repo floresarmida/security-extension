@@ -13,6 +13,7 @@ import '../styles/App.css'
 import Dashboard from '../views/Dashboard/Dashboard'
 import Tasks from '../views/Tasks/Tasks'
 import Editor from '../views/Editor/Editor'
+import Community from '../views/Community/Community'
 import Settings from '../views/Settings/Settings'
 
 @connect(
@@ -44,6 +45,9 @@ class App extends Component {
             </Tab>
             <Tab value='editor' label='Editor' >
               <Editor />
+            </Tab>
+            <Tab value='community' label='Community' >
+              <Community />
             </Tab>
             <Tab value='settings' label='Settings' >
               <Settings />

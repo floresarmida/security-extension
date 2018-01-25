@@ -25,7 +25,7 @@ const Script = ({ executeScript, id, title, description, body, executed, output 
       name={null}
       indentWidth={4}
       collapseStringsAfterLength={25}
-      collapsed
+      collapsed={2}
       displayObjectSize
     />}
   </div>

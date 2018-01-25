@@ -6,13 +6,10 @@ import { connect } from 'react-redux'
 import { executeScript } from '../../ducks/scripts'
 import { scriptGroups } from '../../flux/selectors'
 //  Styles
-import '../../styles/Tasks.css'
+import '../../styles/Community.css'
 
 import { Card, CardTitle } from 'material-ui/Card'
-import { List } from 'material-ui/List'
 import FlatButton from 'material-ui/FlatButton'
-
-import Script from './Script/Script'
 
 @connect(
   state => ({
@@ -23,7 +20,7 @@ import Script from './Script/Script'
     return { actions: bindActionCreators(actions, dispatch) }
   }
 )
-class Tasks extends Component {
+class Community extends Component {
   static propTypes = {
     groups: PropTypes.object.isRequired
     // actions: PropTypes.object.isRequired
@@ -39,16 +36,10 @@ class Tasks extends Component {
         {Object.keys(groups).map(key => (
           <Card key={key} style={{ marginBottom: 16 }}>
             <CardTitle title={key} style={{ paddingBottom: 0 }} />
-            <List>
-              {groups[key].map(script => (
-                <Script key={script.id} {...script} executeScript={actions.executeScript} />
-              ))}
-            </List>
-            <FlatButton secondary fullWidth label={`Execute Group`} />
           </Card>
         ))}
       </section>
     )
   }
 }
-export default Tasks
+export default Community
