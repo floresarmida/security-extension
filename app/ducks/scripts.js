@@ -33,13 +33,21 @@ export const editScript = (id, title) => ({ type: EDIT_SCRIPT, id, title })
 //  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
 export const executeScript = (id, body) => {
   return async function (dispatch) {
-    //  TODO: Async/await?
-    let { success, response: output } = await EVALUATE(body)
+    let output = await EVALUATE(body)
     if (typeof output !== 'object') output = [output]
-    console.warn('executeScript', success, output)
-    success
+    console.warn('executeScript', output)
+    output.success
       ? dispatch({ type: SCRIPT_EXECUTED_SUCCESS, id, output })
       : dispatch({ type: SCRIPT_EXECUTED_FAILURE, id, output })
+
+
+    //  TODO: Async/await?
+    // let { success, response: output } = await EVALUATE(body)
+    // if (typeof output !== 'object') output = [output]
+    // console.warn('executeScript', success, output)
+    // success
+    //   ? dispatch({ type: SCRIPT_EXECUTED_SUCCESS, id, output })
+    //   : dispatch({ type: SCRIPT_EXECUTED_FAILURE, id, output })
   }
 }
 export const executeGroup = (group) => ({ type: EXECUTE_GROUP, group })
