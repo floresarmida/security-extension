@@ -31,6 +31,7 @@ export const addScript = (title) => ({ type: ADD_SCRIPT, title })
 export const deleteScript = (id) => ({ type: DELETE_SCRIPT, id })
 export const editScript = (id, title) => ({ type: EDIT_SCRIPT, id, title })
 //  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
+
 export const executeScript = (id, body) => {
   return async function (dispatch) {
     const script = { id, title: 'title', body }

@@ -11,21 +11,27 @@ export const editorInput = (view) => ({ type: EDITOR_INPUT, view })
 /*
 REDUCER
 */
+const exampleScript = `const extensionScript = {
+  intro: 'This is your first script - welcome!',
+  details: 'Write any code you write and it will execute at the deepest execution environment possible, running alongside the active page',
+  executionEnvironment: 'Core DOM (lower level than Chrome DevTools or the chrome extension API). The "isolated worlds" of chrome are circumvented',
+  supportedFeatures: ['Promises', 'ES6', 'ES7', 'async/await']
+}
+
+console.warn('Security Extension was here!', extensionScript)
+
+//  To finish out your script, use RETURN(val) or ERROR(err)
+//  This callback will bubble an event with your value back to the extension, e.g.
+//  RETURN({ success: true, summary: extensionScript })
+
+//  And here's an async function, we're going to run this one for real.
+setTimeout(
+  () => RETURN({ success: true, summary: extensionScript }),
+  2000
+)`
+
 const initialState = {
-  settings: {
-    theme: 'monokai',
-    fontSize: 16,
-    options: {
-      enableBasicAutocompletion: true,
-      enableLiveAutocompletion: true,
-      enableSnippets: true,
-      showLineNumbers: true,
-      tabSize: 2
-    }
-  },
-  input: `function onLoad(editor) {
-  console.log('Loading complete!');
-}`,
+  input: exampleScript,
   output: '',
   packages: []
 }
