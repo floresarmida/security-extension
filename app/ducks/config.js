@@ -18,7 +18,7 @@ const initialState = {
   autorun: false,
   groups: ['Inspection', 'Static Analysis', 'Document Manipulation'],
   editor: {
-    theme: 'github',
+    theme: 'monokai',
     fontSize: 16,
     options: {
       enableBasicAutocompletion: true,

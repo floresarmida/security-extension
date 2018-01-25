@@ -33,11 +33,6 @@ export const editScript = (id, title) => ({ type: EDIT_SCRIPT, id, title })
 //  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
 export const executeScript = (id, body) => {
   return async function (dispatch) {
-    // const TEST = {
-    //   id: 'ccc',
-    //   title: 'Test C',
-    //   body: `setTimeout(() => RETURN(3), 1000);`
-    // }
     try {
       const tabs = await chrome.tabs
         .query({ active: true, currentWindow: true })

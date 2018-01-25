@@ -20,11 +20,13 @@ const Script = ({ executeScript, id, title, description, body, executed, output 
     />
     {output && <JsonView
       src={output}
+      theme='monokai'
+      iconStyle='square'
       name={null}
-      indentWidth={2}
-      collapsed
+      indentWidth={4}
       collapseStringsAfterLength={25}
-      displayObjectSize={false}
+      collapsed
+      displayObjectSize
     />}
   </div>
 )

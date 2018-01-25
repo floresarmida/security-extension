@@ -30,7 +30,8 @@ chrome.contextMenus.create({
   title: 'Security Extension',
   contexts: ['all'],
   documentUrlPatterns: [
-    'https://github.com/*'
+    // 'https://github.com/*'
+    '<all_urls>'
   ]
 })
 

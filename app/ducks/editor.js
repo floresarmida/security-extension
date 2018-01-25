@@ -13,7 +13,7 @@ REDUCER
 */
 const initialState = {
   settings: {
-    theme: 'github',
+    theme: 'monokai',
     fontSize: 16,
     options: {
       enableBasicAutocompletion: true,
