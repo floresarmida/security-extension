@@ -23,8 +23,8 @@ export const SHOW_ACTIVE = 'SHOW_ACTIVE'
 
 /*
 ACTIONS
-Anonymous Functions: Asyncronous, returns an action creator
-Normal Functions: Are "Thunks", AKA functions that return a function that gets resolved by middleware. Used for async actions.
+  Anonymous Functions: Asyncronous, returns an action creator
+  Normal Functions: Are "Thunks", AKA functions that return a function that gets resolved by middleware. Used for async actions.
 
 */
 export const addScript = (title) => ({ type: ADD_SCRIPT, title })
@@ -32,35 +32,28 @@ export const deleteScript = (id) => ({ type: DELETE_SCRIPT, id })
 export const editScript = (id, title) => ({ type: EDIT_SCRIPT, id, title })
 //  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
 export const executeScript = (id, body) => {
-  const TEST = {
-    id: 'ccc',
-    title: 'Test C',
-    body: 'setTimeout(() => RETURN(Object.keys(window)), 1000);'
-  }
   return async function (dispatch) {
     const script = { id, title: 'title', body }
-    console.warn('script', script)
     try {
       const tabs = await chrome.tabs
         .query({ active: true, currentWindow: true })
       const activeTab = tabs[0].id
       /*
-      EXECUTION ENVIRONMENT (traverses several worlds)
-      BACKGROUND -> CONTENT SCRIPT
-      CONTENT SCRIPT -> RAW DOM
-      RAW DOM -> CONTENT SCRIPT
-      CONTENT SCRIPT -> BACKGROUND
+      EXECUTION ENVIRONMENT: (traverses several worlds)
+        BACKGROUND -> CONTENT SCRIPT
+        CONTENT SCRIPT -> RAW DOM
+        RAW DOM -> CONTENT SCRIPT
+        CONTENT SCRIPT -> BACKGROUND
       */
-      console.log('Received activeTab', activeTab)
-      const results = await chrome
+      let output = await chrome
         .tabs.executeAsyncFunction(activeTab, RAW_DOM_INJECTION, script)
-        // .tabs.executeAsyncFunction(activeTab, asyncScript)
-      console.warn('BACKGROUND RESULTS RECEIVED', results)
-      results
-        ? dispatch({ type: SCRIPT_EXECUTED_SUCCESS, id, output: results })
+      //  Turn strings/ints into array form for JSON view
+      if (output && typeof output !== 'object') output = [output]
+      output
+        ? dispatch({ type: SCRIPT_EXECUTED_SUCCESS, id, output })
         : dispatch({ type: SCRIPT_EXECUTED_SUCCESS, id, output: 'No Output' })
     } catch (err) {
-      console.warn('BACKGROUND ERR', err)
+      console.warn('Security Extension Error w/ Script:', err)
       dispatch({ type: SCRIPT_EXECUTED_FAILURE, id, output: err })
     }
   }

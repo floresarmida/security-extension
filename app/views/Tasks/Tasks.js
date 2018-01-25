@@ -12,7 +12,7 @@ import { Card, CardTitle } from 'material-ui/Card'
 import { List } from 'material-ui/List'
 import FlatButton from 'material-ui/FlatButton'
 
-import Script from './Script'
+import Script from './Script/Script'
 
 const sample = {
   'string': 'this is a test string',
