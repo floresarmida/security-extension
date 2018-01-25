@@ -25,6 +25,7 @@
   "rules": {
     "import/first": 0,
     "global-require": 0,
-    "no-eval": 0
+    "no-eval": 0,
+    "react/no-unused-prop-types": 0
   }
 }

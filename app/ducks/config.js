@@ -21,18 +21,16 @@ const initialState = {
   editor: {
     theme: 'monokai',
     fontSize: 16,
-    options: {
-      tabSize: 2,
-      wrapEnabled: true,
-      showPrintMargin: true,
-      showGutter: true,
-      showLineNumbers: true,
-      highlightActiveLine: true,
-      enableBasicAutocompletion: true,
-      enableLiveAutocompletion: true,
-      enableSnippets: true,
-      displayDataTypes: true
-    }
+    tabSize: 2,
+    wrapEnabled: true,
+    showPrintMargin: true,
+    showGutter: true,
+    showLineNumbers: true,
+    highlightActiveLine: true,
+    enableBasicAutocompletion: true,
+    enableLiveAutocompletion: true,
+    enableSnippets: true,
+    displayDataTypes: true
   },
   inspector: {
     theme: 'monokai',

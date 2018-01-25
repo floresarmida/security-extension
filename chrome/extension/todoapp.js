@@ -8,7 +8,6 @@ chrome.storage.local.get('state', (obj) => {
   const initialState = JSON.parse(state || '{}')
 
   const createStore = require('../../app/flux/store')
-  console.warn('createStore', createStore)
 
   //  Chrome async API support
   require('./transform/chrome-extension-async')

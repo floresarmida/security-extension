@@ -43,11 +43,11 @@ class Settings extends Component {
           <CardTitle title='Editor' style={{ paddingBottom: 0 }} />
           <p>Theme: {editor.theme}</p>
           <p>Font Size: {editor.fontSize}</p>
-          <p>Tab Size: {editor.options.tabSize}</p>
-          <p>Line Numbering: {editor.options.showLineNumbers}</p>
-          <p>Basic AutoCompletion: {editor.options.enableBasicAutocompletion}</p>
-          <p>Live AutoCompletion: {editor.options.enableLiveAutocompletion}</p>
-          <p>Snippets: {editor.options.enableSnippets}</p>
+          <p>Tab Size: {editor.tabSize}</p>
+          <p>Line Numbering: {editor.showLineNumbers}</p>
+          <p>Basic AutoCompletion: {editor.enableBasicAutocompletion}</p>
+          <p>Live AutoCompletion: {editor.enableLiveAutocompletion}</p>
+          <p>Snippets: {editor.enableSnippets}</p>
         </Card>
         <Card key='inspector' style={{ marginBottom: 16 }}>
           <CardTitle title='Inspector' style={{ paddingBottom: 0 }} />
