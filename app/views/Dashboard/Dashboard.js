@@ -8,6 +8,9 @@ const actions = { addScript, editScript }
 //  Styles
 import '../../styles/Dashboard.css'
 
+// require('../../core/chrome-extension-async')
+// require('../../core/execute-async-function')
+
 @connect(
   state => ({
     scripts: state.scripts
@@ -23,6 +26,7 @@ class Dashboard extends Component {
   }
   render () {
     const { scripts } = this.props
+    console.warn('executeAsyncFunction', typeof chrome.tabs.executeAsyncFunction)
     return (
       <section>
         Includes at a glance metrics for the application, scripts that ran on this page, logged output, etc.

@@ -33,19 +33,26 @@ export const editScript = (id, title) => ({ type: EDIT_SCRIPT, id, title })
 //  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
 export const executeScript = (id, body) => {
   return async function (dispatch) {
-    let output = await EVALUATE(body)
-    if (typeof output !== 'object') output = [output]
-    console.warn('executeScript', output)
-    output.success
-      ? dispatch({ type: SCRIPT_EXECUTED_SUCCESS, id, output })
-      : dispatch({ type: SCRIPT_EXECUTED_FAILURE, id, output })
-
-
-    //  TODO: Async/await?
-    // let { success, response: output } = await EVALUATE(body)
+    const TEST = {
+      id: 'ccc',
+      title: 'Test C',
+      body: `setTimeout(() => RETURN(3), 1000);`
+    }
+    try {
+      const tabs = await chrome.tabs.query({ active: true, currentWindow: true })
+      const activeTab = tabs[0].id
+      const results = await chrome.tabs.executeAsyncFunction(
+        activeTab,
+        `() => new Promise((RETURN, REJECT) => { ${TEST.body} })`
+      )
+      console.warn('BACKGROUND RESULTS RECEIVED', results)
+    } catch (err) {
+      console.warn('BACKGROUND ERR', err)
+    }
+    // let output = await EVALUATE(body)
     // if (typeof output !== 'object') output = [output]
-    // console.warn('executeScript', success, output)
-    // success
+    // console.warn('executeScript', output)
+    // output.success
     //   ? dispatch({ type: SCRIPT_EXECUTED_SUCCESS, id, output })
     //   : dispatch({ type: SCRIPT_EXECUTED_FAILURE, id, output })
   }
