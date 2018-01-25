@@ -12,7 +12,7 @@ import '../styles/App.css'
 
 import Dashboard from '../views/Dashboard/Dashboard'
 import Tasks from '../views/Tasks/Tasks'
-import Editor from '../views/Editor/Editor'
+import IDE from '../views/IDE/IDE'
 import Community from '../views/Community/Community'
 import Settings from '../views/Settings/Settings'
 
@@ -43,8 +43,8 @@ class App extends Component {
             <Tab value='tasks' label='Tasks' >
               <Tasks />
             </Tab>
-            <Tab value='editor' label='Editor' >
-              <Editor />
+            <Tab value='ide' label='IDE' >
+              <IDE />
             </Tab>
             <Tab value='community' label='Community' >
               <Community />

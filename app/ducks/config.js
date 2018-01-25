@@ -16,20 +16,32 @@ REDUCER
 const initialState = {
   view: 'dashboard',
   autorun: false,
+  dark: true,
   groups: ['Inspection', 'Static Analysis', 'Document Manipulation'],
   editor: {
     theme: 'monokai',
     fontSize: 16,
     options: {
+      tabSize: 2,
+      wrapEnabled: true,
+      showPrintMargin: true,
+      showGutter: true,
+      showLineNumbers: true,
+      highlightActiveLine: true,
       enableBasicAutocompletion: true,
       enableLiveAutocompletion: true,
       enableSnippets: true,
-      showLineNumbers: true,
-      tabSize: 2
-    },
-    value: `function onLoad(editor) {
-  console.log('Loading complete!');
-}`
+      displayDataTypes: true
+    }
+  },
+  inspector: {
+    theme: 'monokai',
+    indentWidth: 4,
+    collapsed: true,
+    displayDataTypes: true,
+    displayObjectSize: true,
+    collapseStringsAfterLength: 25,
+    enableClipboard: true
   }
 }
 

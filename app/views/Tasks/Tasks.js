@@ -16,7 +16,8 @@ import Script from './Script/Script'
 
 @connect(
   state => ({
-    groups: scriptGroups(state)
+    groups: scriptGroups(state),
+    inspectorConfig: state.config.inspector
   }),
   dispatch => {
     const actions = { executeScript }
@@ -25,14 +26,16 @@ import Script from './Script/Script'
 )
 class Tasks extends Component {
   static propTypes = {
-    groups: PropTypes.object.isRequired
+    groups: PropTypes.object.isRequired,
+    inspectorConfig: PropTypes.object.isRequired
     // actions: PropTypes.object.isRequired
   }
   static defaultProps = {
-    groups: {}
+    groups: {},
+    inspectorConfig: {}
   }
   render () {
-    const { groups, actions } = this.props
+    const { groups, inspectorConfig, actions } = this.props
 
     return (
       <section>
@@ -41,7 +44,7 @@ class Tasks extends Component {
             <CardTitle title={key} style={{ paddingBottom: 0 }} />
             <List>
               {groups[key].map(script => (
-                <Script key={script.id} {...script} executeScript={actions.executeScript} />
+                <Script key={script.id} {...script} executeScript={actions.executeScript} inspectorConfig={inspectorConfig} />
               ))}
             </List>
             <FlatButton secondary fullWidth label={`Execute Group`} />

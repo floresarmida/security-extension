@@ -4,9 +4,9 @@ import { ListItem } from 'material-ui/List'
 import Checkbox from 'material-ui/Checkbox'
 import ActionInfo from 'material-ui/svg-icons/action/info'
 
-import JsonView from 'react-json-view'
+import Inspector from 'react-json-view'
 
-const Script = ({ executeScript, id, title, description, body, executed, output }) => (
+const Script = ({ executeScript, id, title, description, body, executed, output, inspectorConfig }) => (
   <div>
     <ListItem
       primaryText={title}
@@ -18,15 +18,12 @@ const Script = ({ executeScript, id, title, description, body, executed, output 
       rightIcon={<ActionInfo />}
       style={{ paddingBottom: 4 }}
     />
-    {output && <JsonView
+    {output && <Inspector
       src={output}
-      theme='monokai'
-      iconStyle='square'
       name={null}
-      indentWidth={4}
-      collapseStringsAfterLength={25}
       collapsed={2}
-      displayObjectSize
+      iconStyle='square'
+      {...inspectorConfig}
     />}
   </div>
 )
