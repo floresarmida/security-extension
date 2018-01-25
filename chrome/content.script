@@ -5,39 +5,50 @@ This contains an event listener added directly to a site's DOM.
 The execution environment IS the website itself.
 This serves as a means of communicating w/ our extension via listeners.
 */
-function INJECT_SCRIPT (script) {
-  //  https://stackoverflow.com/questions/30197155/wait-for-an-async-callback-to-finish-before-completing-separate-function-in-java
-  //  https://stackoverflow.com/questions/8578617/inject-a-script-tag-with-remote-src-and-wait-for-it-to-execute
-  /*
-  Proposed flow:
-  - Add an event listener awaiting a script value
-  - Inject said script
-    - Include an event that returns said value
-    - on value, return the data
-  */
-  function inject () {
-    return new Promise((resolve, reject) => {
-      var element = document.createElement('script');
-      element.async = true;
-      // element.src = src;
-      element.textContent = `var OUTPUT = (function () { ${script} })();`
-      element.addEventListener('load', resolve(OUTPUT));
-      element.addEventListener('error', () => reject('Error loading script.'));
-      element.addEventListener('abort', () => reject('Script loading aborted.'));
-      (document.head || document.documentElement).appendChild(injection);
-    });
-  }
-  inject(script)
-    .then(result => {
-      console.warn('inject(script) result:', result)
-      const event = document.createEvent('CustomEvent')
-      event.initCustomEvent('INJECT_SCRIPT', true, true, result)
-      window.dispatchEvent(event)
-    })
-    .then(() => {
-      console.log('TODO: removal of tag via promise')
-      // injection.remove()
-    })
+/*
+INJECT_SCRIPT: XSS script injection
+circumvents Chrome's isolated world / content script DOM, which has limited permissions
+
+FLOW EXPLAINED:
+- BACKGROUND (extension) creates event messages w/ the CONTENT SCRIPT (which has limited RAW DOM access)
+- Background sends a script for execution
+
+- CONTENT Define an event listener based on the script ID (conflictless)
+
+- Initialize a script tag with injection code to run in the RAW DOM
+  - Begin with an async function wrapper
+  - Promisify the script body
+    - Await RETURN or REJECT
+  - Create and dispatch an event listener, passing the promise return value
+- Inject the script, which executes immediately
+- Remove the script tag to hide the evidence.
+
+- Function executes in RAW DOM, dispatches event, then falls out of scope. Poof.
+
+- Event listener passes a message back the the BACKGROUND, our extension.
+
+CONCLUSION:
+*/
+function INJECT_SCRIPT ({ id, title, body }) {
+  /* EXECUTION ENVIRONMENT: RAW DOM -> CONTENT SCRIPT */
+  // window.addEventListener(id, (e) => {
+  //   const { detail } = e;
+  //   console.warn(id, detail)
+  //   /* EXECUTION ENVIRONMENT: CONTENT SCRIPT -> BACKGROUND (EXTENSION) */
+  // }, { once: true });
+
+  const element = document.createElement('script');
+  /* EXECUTION ENVIRONMENT: RAW DOM */
+  element.textContent = `(async function () {
+    const execution = () => new Promise((RETURN, REJECT) => { ${body} });
+    let response = await execution();
+    var event = document.createEvent("CustomEvent");
+    event.initCustomEvent("${id}", true, true, response);
+    window.dispatchEvent(event);
+  })();`;
+  /* EXECUTION ENVIRONMENT: CONTENT SCRIPT -> RAW DOM */
+  (document.head || document.documentElement).appendChild(element);
+  element.parentNode.removeChild(element);
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -48,15 +59,19 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   try {
     switch (type) {
       case 'script':
-        // response = eval(`(function() { ${body} })();`)
-        console.log('INJECTING')
-        window.addEventListener('INJECT_SCRIPT', e => {
-          console.warn('SCRIPT INJECTED', e)
-          sendResponse({ success: true, response: e.detail })
-        })
-        INJECT_SCRIPT(body)
-        // console.log('RESULTS IN CONTENT.SCRIPT', response)
-        // sendResponse({ success: true, response })
+        /* EXECUTION ENVIRONMENT: RAW DOM -> CONTENT SCRIPT */
+        const TEST = {
+          id: 'ccc',
+          title: 'Test C',
+          body: `setTimeout(() => RETURN(3), 1000);`
+        }
+        window.addEventListener(TEST.id, (e) => {
+          const { detail } = e;
+          /* EXECUTION ENVIRONMENT: CONTENT SCRIPT -> BACKGROUND (EXTENSION) */
+          console.warn(TEST.id, detail)
+          sendResponse({ success: true, response: detail })
+        }, { once: true });
+        INJECT_SCRIPT(TEST);
         break
       case 'import':
         response = 'Import a package script placeholder'
@@ -67,6 +82,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       //   sendResponse({ success: false, response })
     }
   } catch (err) {
+    console.error(err)
     response = { 'ERROR': err.message }
     sendResponse({ success: false, response })
   }

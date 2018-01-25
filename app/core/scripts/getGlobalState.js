@@ -8,5 +8,6 @@ for (const w in window) {
   if (!standardGlobals.includes(w)) globals[w] = window[w]
 }
 console.warn(globals)
-return globals
+// return globals
+RETURN(globals)
 `
