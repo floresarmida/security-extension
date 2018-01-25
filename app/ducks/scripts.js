@@ -35,7 +35,7 @@ export const executeScript = (id, body) => {
   const TEST = {
     id: 'ccc',
     title: 'Test C',
-    body: 'setTimeout(() => RETURN(3), 1000);'
+    body: 'setTimeout(() => RETURN(Object.keys(window)), 1000);'
   }
   return async function (dispatch) {
     const script = { id, title: 'title', body }
@@ -53,7 +53,7 @@ export const executeScript = (id, body) => {
       */
       console.log('Received activeTab', activeTab)
       const results = await chrome
-        .tabs.executeAsyncFunction(activeTab, RAW_DOM_INJECTION, TEST)
+        .tabs.executeAsyncFunction(activeTab, RAW_DOM_INJECTION, script)
         // .tabs.executeAsyncFunction(activeTab, asyncScript)
       console.warn('BACKGROUND RESULTS RECEIVED', results)
       results
