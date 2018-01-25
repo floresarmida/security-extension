@@ -13,16 +13,10 @@ EVALUATE: Run a script
 NOTE: This may be wrapped in string literals, so don't use `these`
 */
 export const RAW_DOM_INJECTION = `
-  function RAW_DOM_INJECTION (script) {
-  // console.warn('RAW_DOM_INJECTION', typeof Promise)
+  function RAW_DOM_INJECTION (script = {}) {
+  const { id, title, body } = script
+  console.warn('EXECUTING:', script)
   return new Promise((resolve, reject) => {
-    const TEST = {
-      id: 'ccc',
-      title: 'Test C',
-      body: 'setTimeout(() => RETURN(3), 1000);'
-    }
-    const { id, title, body } = TEST
-    console.warn('RAW_DOM_INJECTION', typeof Promise)
     try {
       /* EXECUTION ENVIRONMENT: RAW DOM -> CONTENT SCRIPT */
       window.addEventListener(id, (e) => {

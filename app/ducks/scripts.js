@@ -32,13 +32,18 @@ export const deleteScript = (id) => ({ type: DELETE_SCRIPT, id })
 export const editScript = (id, title) => ({ type: EDIT_SCRIPT, id, title })
 //  https://stackoverflow.com/questions/4532236/how-to-access-the-webpage-dom-rather-than-the-extension-page-dom
 export const executeScript = (id, body) => {
+  const TEST = {
+    id: 'ccc',
+    title: 'Test C',
+    body: 'setTimeout(() => RETURN(3), 1000);'
+  }
   return async function (dispatch) {
+    const script = { id, title: 'title', body }
+    console.warn('script', script)
     try {
       const tabs = await chrome.tabs
         .query({ active: true, currentWindow: true })
       const activeTab = tabs[0].id
-      // const asyncScript = `() => new Promise((RETURN, ERROR) => { ${body} })`
-      // const asyncScript = RAW_DOM_INJECTION
       /*
       EXECUTION ENVIRONMENT (traverses several worlds)
       BACKGROUND -> CONTENT SCRIPT
@@ -48,7 +53,7 @@ export const executeScript = (id, body) => {
       */
       console.log('Received activeTab', activeTab)
       const results = await chrome
-        .tabs.executeAsyncFunction(activeTab, RAW_DOM_INJECTION, body)
+        .tabs.executeAsyncFunction(activeTab, RAW_DOM_INJECTION, TEST)
         // .tabs.executeAsyncFunction(activeTab, asyncScript)
       console.warn('BACKGROUND RESULTS RECEIVED', results)
       results
