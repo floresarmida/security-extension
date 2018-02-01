@@ -45,7 +45,6 @@ class Editor extends Component {
   render ({ input, packages, config, actions } = this.props) {
     return (
       <section>
-        TEST
         {config && <AceEditor
           name='composer'
           mode='javascript'

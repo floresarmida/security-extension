@@ -35,6 +35,7 @@ button {
 body {
   min-width: 600px;
   max-width: 800px;
+  /* min-height: 1000px; */
   margin: 0 auto;
   background: #424242;
   color: #F5F5F5;

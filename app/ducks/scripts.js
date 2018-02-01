@@ -48,6 +48,7 @@ export const executeScript = (id, body) => {
       */
       let output = await chrome
         .tabs.executeAsyncFunction(activeTab, RAW_DOM_INJECTION, script)
+      console.log('DOM output:', output)
       //  Turn strings/ints into array form for JSON view
       if (output && typeof output !== 'object') output = [output]
       output

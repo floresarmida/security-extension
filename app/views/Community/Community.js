@@ -1,15 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 // import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 //  Redux Actions
 import { executeScript } from '../../ducks/scripts'
 import { scriptGroups } from '../../flux/selectors'
 //  Styles
 import '../../styles/Community.css'
 
+import Category from './Category/Category'
+import Search from './Search/Search'
+import Submit from './Submit/Submit'
+
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation'
+import EditorIcon from 'material-ui/svg-icons/action/code'
+import OutputIcon from 'material-ui/svg-icons/action/compare-arrows'
+import DocsIcon from 'material-ui/svg-icons/action/chrome-reader-mode'
+
 import { Card, CardTitle } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
 
 @connect(
   state => ({
@@ -28,16 +36,44 @@ class Community extends Component {
   static defaultProps = {
     groups: {}
   }
-  render () {
-    const { groups, actions } = this.props
-
+  constructor (props) {
+    super(props)
+    this.state = { index: 0 }
+    this.select = this.select.bind(this)
+  }
+  select = (index) => this.setState({ index })
+  render (
+    { groups } = this.props,
+    { index } = this.state
+  ) {
+    const Views = [<Category />, <Search />, <Submit />]
     return (
       <section>
+        <div>
+          {Views[index]}
+        </div>
         {Object.keys(groups).map(key => (
           <Card key={key} style={{ marginBottom: 16 }}>
             <CardTitle title={key} style={{ paddingBottom: 0 }} />
           </Card>
         ))}
+        <BottomNavigation selectedIndex={index}>
+          <BottomNavigationItem
+            label='Categories'
+            icon={<EditorIcon />}
+            onClick={() => this.select(0)}
+          />
+          <BottomNavigationItem
+            label='Search'
+            icon={<OutputIcon />}
+            onClick={() => this.select(1)}
+          />
+          <BottomNavigationItem
+            label='Submit'
+            icon={<DocsIcon />}
+            onClick={() => this.select(2)}
+          />
+        </BottomNavigation>
       </section>
     )
   }
