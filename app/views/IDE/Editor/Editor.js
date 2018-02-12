@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 //  Redux Actions
+import { editorInput, executeEditorScript } from '../../../ducks/editor'
 import { executeScript } from '../../../ducks/scripts'
 //  Styles
 
@@ -20,7 +21,7 @@ import FlatButton from 'material-ui/FlatButton'
     config: state.config.editor
   }),
   dispatch => {
-    const actions = { executeScript }
+    const actions = { editorInput, executeScript, executeEditorScript }
     return { actions: bindActionCreators(actions, dispatch) }
   }
 )
@@ -53,12 +54,13 @@ class Editor extends Component {
           value={input}
           width='100%'
           height='400px'
+          onChange={(input) => actions.editorInput(input)}
         />}
         <FlatButton
           secondary
           fullWidth
           label='Execute'
-          onClick={() => actions.executeScript('TEST', input)}
+          onClick={() => actions.executeEditorScript(input)}
         />
       </section>
     )

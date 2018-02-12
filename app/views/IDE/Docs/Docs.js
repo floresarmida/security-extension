@@ -1,15 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
-//  Redux Actions
-// import { editConfig } from '../../../ducks/config'
 
-@connect(
-  state => ({
-    config: state.config
-  })
-  // dispatch => ({ actions: bindActionCreators({ editConfig }, dispatch) })
-)
+@connect(state => ({
+  config: state.config
+}))
 class Docs extends Component {
   static propTypes = {
     config: PropTypes.object.isRequired

@@ -1,26 +1,31 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
-//  Redux Actions
-// import { editConfig } from '../../../ducks/config'
 
-@connect(
-  state => ({
-    config: state.config
-  })
-  // dispatch => ({ actions: bindActionCreators({ editConfig }, dispatch) })
-)
+import Inspector from 'react-json-view'
+
+@connect(state => ({
+  output: state.editor.output,
+  inspectorConfig: state.config.inspector
+}))
 class Output extends Component {
   static propTypes = {
-    config: PropTypes.object.isRequired
+    output: PropTypes.object.isRequired,
+    inspectorConfig: PropTypes.object
   }
   static defaultProps = {
-    config: {}
+    output: { 0: 'No output' },
+    inspectorConfig: {}
   }
-  render ({ config } = this.props) {
+  render ({ output, inspectorConfig } = this.props) {
     return (
       <section>
-        Placeholder for output inspector
+        <Inspector
+          src={output}
+          name={null}
+          collapsed={2}
+          iconStyle='square'
+          {...inspectorConfig}
+        />
       </section>
     )
   }
