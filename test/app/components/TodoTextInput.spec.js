@@ -26,7 +26,7 @@ function setup (propOverrides) {
   return { props, output, renderer }
 }
 
-describe('securityextension TodoTextInput component', () => {
+describe('todoapp TodoTextInput component', () => {
   it('should render correctly', () => {
     const { output } = setup()
     expect(output.props.placeholder).to.equal('What needs to be done?')

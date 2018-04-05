@@ -17,7 +17,7 @@ function setup () {
   return { props, output, renderer }
 }
 
-describe('securityextension Header component', () => {
+describe('todoapp Header component', () => {
   it('should render correctly', () => {
     const { output } = setup()
 

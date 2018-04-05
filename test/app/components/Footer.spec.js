@@ -33,7 +33,7 @@ function getTextContent (elem) {
   , '')
 }
 
-describe('securityextension Footer component', () => {
+describe('todoapp Footer component', () => {
   it('should render correctly', () => {
     const { output } = setup()
     expect(output.type).to.equal('footer')

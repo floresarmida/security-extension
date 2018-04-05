@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-// import PropTypes from 'prop-types'
+import React, { PropTypes } from 'react'
+
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 //  Redux Actions
@@ -19,6 +19,11 @@ import DocsIcon from 'material-ui/svg-icons/action/chrome-reader-mode'
 
 import { Card, CardTitle } from 'material-ui/Card'
 
+/*
+COMMUNITY VIEW:
+Show a list of scripts available as plug-ins
+Kind of like an app store
+*/
 @connect(
   state => ({
     groups: scriptGroups(state)
@@ -28,10 +33,10 @@ import { Card, CardTitle } from 'material-ui/Card'
     return { actions: bindActionCreators(actions, dispatch) }
   }
 )
-class Community extends Component {
+class Community extends React.Component {
   static propTypes = {
-    groups: PropTypes.object.isRequired
-    // actions: PropTypes.object.isRequired
+    groups: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
   }
   static defaultProps = {
     groups: {}

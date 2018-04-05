@@ -76,7 +76,7 @@ setTimeout(
   2000
 )`
 
-const initialState = {
+export const initialState = {
   input: exampleScript,
   output: '',
   packages: []

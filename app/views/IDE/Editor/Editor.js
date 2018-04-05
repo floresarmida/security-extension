@@ -1,12 +1,12 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 //  Redux Actions
 import { editorInput, executeEditorScript } from '../../../ducks/editor'
 import { executeScript } from '../../../ducks/scripts'
 //  Styles
-
 import AceEditor from 'react-ace'
+//  Ace styles - must be imported here
 import 'brace'
 import 'brace/mode/javascript'
 import 'brace/theme/github'
@@ -25,7 +25,7 @@ import FlatButton from 'material-ui/FlatButton'
     return { actions: bindActionCreators(actions, dispatch) }
   }
 )
-class Editor extends Component {
+class Editor extends React.Component {
   static propTypes = {
     input: PropTypes.string.isRequired,
     packages: PropTypes.array.isRequired,
@@ -43,7 +43,9 @@ class Editor extends Component {
   - If focused, use setTimeout(cb(), 5000) to save every few secs
   - Make saving an onClick event?
   */
-  render ({ input, packages, config, actions } = this.props) {
+  render (
+    { input, packages, config, actions } = this.props
+  ) {
     return (
       <section>
         {config && <AceEditor

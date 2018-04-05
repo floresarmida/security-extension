@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -22,7 +22,7 @@ import Settings from '../views/Settings/Settings'
   }),
   dispatch => ({ actions: bindActionCreators({ changeView }, dispatch) })
 )
-class App extends Component {
+class App extends React.Component {
   static propTypes = {
     view: PropTypes.string.isRequired
   }

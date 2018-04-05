@@ -6,7 +6,7 @@ const customPath = path.join(__dirname, './customPublicPath')
 
 module.exports = {
   entry: {
-    securityextension: [customPath, path.join(__dirname, '../chrome/extension/securityextension')],
+    todoapp: [customPath, path.join(__dirname, '../chrome/extension/todoapp')],
     background: [customPath, path.join(__dirname, '../chrome/extension/background')],
     inject: [customPath, path.join(__dirname, '../chrome/extension/inject')]
   },

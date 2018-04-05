@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react'
-// import PropTypes from 'prop-types'
+import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 //  Redux Actions
@@ -8,25 +7,26 @@ const actions = { addScript, editScript }
 //  Styles
 import '../../styles/Dashboard.css'
 
-// require('../../core/chrome-extension-async')
-// require('../../core/execute-async-function')
-
+/*
+DASHBOARD VIEW:
+Provides top-level data about the application state
+*/
 @connect(
   state => ({
     scripts: state.scripts
   }),
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-class Dashboard extends Component {
+class Dashboard extends React.Component {
   static propTypes = {
     scripts: PropTypes.array.isRequired
   }
   static defaultProps = {
     scripts: []
   }
-  render () {
-    const { scripts } = this.props
-    console.warn('executeAsyncFunction', typeof chrome.tabs.executeAsyncFunction)
+  render (
+    { scripts } = this.props
+  ) {
     return (
       <section>
         Includes at a glance metrics for the application, scripts that ran on this page, logged output, etc.

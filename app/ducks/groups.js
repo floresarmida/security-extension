@@ -20,7 +20,7 @@ export const editGroup = (id, text) => ({ type: EDIT_GROUP, id, text })
 /*
 REDUCER
 */
-const initialState = [{
+export const initialState = [{
   text: 'Redux',
   id: 0
 }]

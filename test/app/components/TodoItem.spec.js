@@ -33,7 +33,7 @@ function setup (editing = false) {
   return { props, output, renderer }
 }
 
-describe('securityextension TodoItem component', () => {
+describe('todoapp TodoItem component', () => {
   it('should render correctly', () => {
     const { output } = setup()
 

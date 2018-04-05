@@ -14,6 +14,10 @@ import FlatButton from 'material-ui/FlatButton'
 
 import Script from './Script/Script'
 
+/*
+TASKS VIEW:
+Shows a list of ad-hoc tasks that can be run against the page
+*/
 @connect(
   state => ({
     groups: scriptGroups(state),
@@ -27,16 +31,16 @@ import Script from './Script/Script'
 class Tasks extends Component {
   static propTypes = {
     groups: PropTypes.object.isRequired,
-    inspectorConfig: PropTypes.object.isRequired
-    // actions: PropTypes.object.isRequired
+    inspectorConfig: PropTypes.object.isRequired,
+    actions: PropTypes.object.isRequired
   }
   static defaultProps = {
     groups: {},
     inspectorConfig: {}
   }
-  render () {
-    const { groups, inspectorConfig, actions } = this.props
-
+  render (
+    { groups, inspectorConfig, actions } = this.props
+  ) {
     return (
       <section>
         {Object.keys(groups).map(key => (
