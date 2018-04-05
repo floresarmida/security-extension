@@ -1,3 +1,7 @@
+/*
+CONTEXT MENU CONFIG
+Sets event listeners using the chrome API for opening the extension onClick
+*/
 let windowId = 0
 const CONTEXT_MENU_ID = 'security_extension_context_menu'
 
@@ -29,10 +33,7 @@ chrome.contextMenus.create({
   id: CONTEXT_MENU_ID,
   title: 'Security Extension',
   contexts: ['all'],
-  documentUrlPatterns: [
-    // 'https://github.com/*'
-    '<all_urls>'
-  ]
+  documentUrlPatterns: ['<all_urls>']
 })
 
 chrome.contextMenus.onClicked.addListener((event) => {

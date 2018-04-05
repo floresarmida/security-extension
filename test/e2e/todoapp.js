@@ -75,9 +75,9 @@ describe('window (popup) page', function test () {
 
   after(async () => driver.quit())
 
-  it('should open Redux TodoMVC Example', async () => {
+  it('should open Security Extension Example', async () => {
     const title = await driver.getTitle()
-    expect(title).to.equal('Redux TodoMVC Example (Window)')
+    expect(title).to.equal('Security Extension Example (Window)')
   })
 
   it('should can add todo', async () => {

@@ -1,4 +1,9 @@
 /*
+GROUPS DUCK:
+Keeps track of groups of scripts that can be run as batch jobs
+*/
+
+/*
 CONSTANTS
 */
 const ADD_GROUP = 'ADD_GROUP'

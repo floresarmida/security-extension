@@ -1,3 +1,8 @@
+/*
+SCRIPT DUCK:
+Used for ad-hoc execution of single scripts
+Contains the redux actions for single script execution
+*/
 import cuid from 'cuid'
 /*
 CORE SCRIPTS

@@ -1,4 +1,10 @@
 /*
+CONFIG DUCK:
+Contains top-level preferences for the app, IDE and JSON inspector
+Allows users to tweak preferences such as font size, autocomplete, etc.
+*/
+
+/*
 CONSTANTS
 */
 const CHANGE_VIEW = 'CHANGE_VIEW'

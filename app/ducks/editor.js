@@ -1,9 +1,14 @@
 /*
+EDITOR DUCK:
+Tracks the state of the editor (user input, script output, etc)
+*/
+
+/*
 IMPORTS
 */
-// import { executeScript } from './scripts'
-// TODO: DRY execution function
 import { RAW_DOM_INJECTION } from '../core/DOM'
+// TODO: DRY execution function
+// import { executeScript } from './scripts'
 
 /*
 CONSTANTS
@@ -14,6 +19,7 @@ const EDITOR_EXECUTED_SUCCESS = 'EDITOR_EXECUTED_SUCCESS'
 const EDITOR_EXECUTED_FAILURE = 'EDITOR_EXECUTED_FAILURE'
 // UUID / enum for editor scripts
 const EDITOR_SCRIPT_ID = 'EDITOR_SCRIPT'
+
 /*
 ACTIONS
 */

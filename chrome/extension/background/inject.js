@@ -1,3 +1,7 @@
+/*
+INITIAL INJECTION
+Initializes and executes the react DOM (as a script)
+*/
 function isInjected (tabId) {
   return chrome.tabs.executeScriptAsync(tabId, {
     code: `var injected = window.reactExampleInjected;
@@ -31,7 +35,6 @@ function loadScript (name, tabId, cb) {
   }
 }
 
-// const arrowURLs = ['^https://github\\.com']
 const arrowURLs = ['<all_urls>']
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {

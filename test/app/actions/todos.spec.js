@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import * as types from '../../../app/constants/ActionTypes'
 import * as actions from '../../../app/actions/todos'
 
-describe('todoapp todo actions', () => {
+describe('securityextension todo actions', () => {
   it('addTodo should create ADD_TODO action', () => {
     expect(actions.addTodo('Use Redux')).to.eql({
       type: types.ADD_TODO,

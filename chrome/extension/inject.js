@@ -16,7 +16,7 @@ class InjectApp extends Component {
     return (
       <div>
         <button onClick={this.buttonOnClick}>
-          Open TodoApp
+          Open securityextension
         </button>
         <Dock
           position='right'

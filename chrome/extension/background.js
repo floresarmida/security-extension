@@ -1,3 +1,8 @@
+/*
+BACKGROUND INIT:
+Configures the global state of the background (app)
+execution environment (e.g. the extension frame itself)
+*/
 const bluebird = require('bluebird')
 
 global.Promise = bluebird
@@ -30,4 +35,3 @@ promisifyAll(chrome.storage, [
 
 require('./background/contextMenus')
 require('./background/inject')
-// require('./background/badge')
