@@ -18,6 +18,10 @@ import DocsIcon from 'material-ui/svg-icons/action/chrome-reader-mode'
 
 import { Card, CardTitle } from 'material-ui/Card'
 
+/*
+COMMUNITY VIEW:
+Serves like an "app store" for users to share, rate and comment on scripts
+*/
 @connect(
   state => ({
     groups: scriptGroups(state)

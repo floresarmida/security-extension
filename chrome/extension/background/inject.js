@@ -1,5 +1,6 @@
 /*
-INITIAL INJECTION
+BACKGROUND > INJECT.JS
+ENVIRONMENT: Chrome Root
 Initializes and executes the react DOM (as a script)
 */
 function isInjected (tabId) {

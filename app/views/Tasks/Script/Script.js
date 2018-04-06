@@ -6,6 +6,10 @@ import ActionInfo from 'material-ui/svg-icons/action/info'
 
 import Inspector from 'react-json-view'
 
+/*
+SCRIPT COMPONENT
+Renders a script's metadata w/ code preview
+*/
 const Script = ({ executeScript, id, title, description, body, executed, output, inspectorConfig }) => (
   <div>
     <ListItem
@@ -33,8 +37,8 @@ Script.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   executed: PropTypes.bool.isRequired,
-  executeScript: PropTypes.func.isRequired
-  // output: PropTypes.array
+  executeScript: PropTypes.func.isRequired,
+  output: PropTypes.any //  Should be array
 }
 Script.defaultProps = {
   description: ''

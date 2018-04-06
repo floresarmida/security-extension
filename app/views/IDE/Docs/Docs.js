@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+/*
+IDE > DOCS PANE
+Documentation / how to for the editor
+*/
 @connect(state => ({
   config: state.config
 }))

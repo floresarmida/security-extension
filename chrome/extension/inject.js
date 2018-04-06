@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Dock from 'react-dock'
 
+/*
+INJECT.JS
+ENVIRONMENT: Background Script
+Renders the button and provides the onClick events necessary to open the extension
+*/
 class InjectApp extends Component {
   constructor (props) {
     super(props)

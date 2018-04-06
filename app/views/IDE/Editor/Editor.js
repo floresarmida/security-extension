@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux'
 import { editorInput, executeEditorScript } from '../../../ducks/editor'
 import { executeScript } from '../../../ducks/scripts'
 //  Styles
-
 import AceEditor from 'react-ace'
+//  Import elements for react-ace (do not change or use require())
 import 'brace'
 import 'brace/mode/javascript'
 import 'brace/theme/github'
@@ -14,6 +14,10 @@ import 'brace/theme/monokai'
 
 import FlatButton from 'material-ui/FlatButton'
 
+/*
+IDE > EDITOR PANE
+The core IDE for the user
+*/
 @connect(
   state => ({
     input: state.editor.input,

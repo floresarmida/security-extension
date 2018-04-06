@@ -1,5 +1,6 @@
 /*
-BACKGROUND INIT:
+BACKGROUND.JS
+ENVIRONMENT: Background Script
 Configures the global state of the background (app)
 execution environment (e.g. the extension frame itself)
 */

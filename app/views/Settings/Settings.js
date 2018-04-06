@@ -11,6 +11,10 @@ import '../../styles/Settings.css'
 import { Card, CardTitle } from 'material-ui/Card'
 import Toggle from 'material-ui/Toggle'
 
+/*
+SETTINGS VIEW:
+Allows users to change app settings, editors, etc.
+*/
 @connect(
   state => ({
     autorun: state.config.autorun,

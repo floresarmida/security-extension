@@ -1,4 +1,7 @@
 /*
+DOCUMENT OBJECT MODEL (DOM) MANIPULATOR
+ENVIRONMENT: Background (but it traverses environments)
+
 DOM - Used to interact with raw pages
 Serves as the interface between the popup DOM and content DOM
 

@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 
 import Inspector from 'react-json-view'
 
+/*
+IDE > OUTPUT PANE
+Shows the output of a command
+*/
 @connect(state => ({
   output: state.editor.output,
   inspectorConfig: state.config.inspector

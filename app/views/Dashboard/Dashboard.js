@@ -7,6 +7,10 @@ const actions = { addScript, editScript }
 //  Styles
 import '../../styles/Dashboard.css'
 
+/*
+DASHBOARD VIEW:
+Shows groups & individual tasks that can be executed ad-hoc
+*/
 @connect(
   state => ({
     scripts: state.scripts

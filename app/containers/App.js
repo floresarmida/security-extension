@@ -16,6 +16,11 @@ import IDE from '../views/IDE/IDE'
 import Community from '../views/Community/Community'
 import Settings from '../views/Settings/Settings'
 
+/*
+REACT APP
+The core app, provides redux and MUI theme context
+Hot reloading begins to be supported here
+*/
 @connect(
   state => ({
     view: state.config.view

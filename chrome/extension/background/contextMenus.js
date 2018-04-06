@@ -1,5 +1,6 @@
 /*
-CONTEXT MENU CONFIG
+BACKGROUND > CONTEXT MENUS
+ENVIRONMENT: Chrome Root
 Sets event listeners using the chrome API for opening the extension onClick
 */
 let windowId = 0

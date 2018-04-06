@@ -11,6 +11,11 @@ import EditorIcon from 'material-ui/svg-icons/action/code'
 import OutputIcon from 'material-ui/svg-icons/action/compare-arrows'
 import DocsIcon from 'material-ui/svg-icons/action/chrome-reader-mode'
 
+/*
+IDE VIEW:
+Provides an interactive dev environment,
+complete w/ docs for users to compose their own snippets.
+*/
 @connect(
   state => ({
     config: state.config

@@ -1,3 +1,8 @@
+/*
+REDUX SELECTORS
+Allows you to memoize (it's like caching) state nodes,
+preventing components from re-rendering unneccesarily.
+*/
 import { createSelector } from 'reselect'
 
 const select = {

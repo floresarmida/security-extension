@@ -14,6 +14,10 @@ import FlatButton from 'material-ui/FlatButton'
 
 import Script from './Script/Script'
 
+/*
+TASKS VIEW:
+Shows groups & individual tasks that can be executed ad-hoc
+*/
 @connect(
   state => ({
     groups: scriptGroups(state),

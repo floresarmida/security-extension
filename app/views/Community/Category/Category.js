@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+/*
+COMMUNITY > CATEGORY PANE
+Renders scripts by category
+*/
 @connect(
   state => ({
     scripts: state.scripts

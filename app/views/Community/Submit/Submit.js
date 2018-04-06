@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+/*
+COMMUNITY > SUBMIT PANE
+Allows you to submit a saved script to the community repo
+*/
 @connect(
   state => ({
     scripts: state.scripts

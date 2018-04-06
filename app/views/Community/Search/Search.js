@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+/*
+COMMUNITY > SEARCH PANE
+Advanced filtering of scripts rendered
+*/
 @connect(
   state => ({
     scripts: state.scripts
