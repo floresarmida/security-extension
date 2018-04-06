@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 //  Redux Actions
@@ -7,17 +7,13 @@ const actions = { addScript, editScript }
 //  Styles
 import '../../styles/Dashboard.css'
 
-/*
-DASHBOARD VIEW:
-Provides top-level data about the application state
-*/
 @connect(
   state => ({
     scripts: state.scripts
   }),
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-class Dashboard extends React.Component {
+class Dashboard extends Component {
   static propTypes = {
     scripts: PropTypes.array.isRequired
   }

@@ -1,15 +1,13 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import Inspector from 'react-json-view'
 
-@connect(
-  state => ({
-    output: state.editor.output,
-    inspectorConfig: state.config.inspector
-  })
-)
-class Output extends React.Component {
+@connect(state => ({
+  output: state.editor.output,
+  inspectorConfig: state.config.inspector
+}))
+class Output extends Component {
   static propTypes = {
     output: PropTypes.object.isRequired,
     inspectorConfig: PropTypes.object

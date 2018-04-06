@@ -72,7 +72,7 @@ export const clearExecuted = (id) => ({ type: CLEAR_EXECUTED, id })
 /*
 REDUCER
 */
-export const initialState = [
+const initialState = [
   {
     id: cuid(),
     group: 'Inspection',

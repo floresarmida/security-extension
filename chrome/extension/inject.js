@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { render } from 'react-dom'
 import Dock from 'react-dock'
 
-class InjectApp extends React.Component {
+class InjectApp extends Component {
   constructor (props) {
     super(props)
     this.state = { isVisible: false }
@@ -16,7 +16,7 @@ class InjectApp extends React.Component {
     return (
       <div>
         <button onClick={this.buttonOnClick}>
-          Open todoapp
+          Open Security Extension
         </button>
         <Dock
           position='right'

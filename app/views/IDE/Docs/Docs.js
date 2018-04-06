@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 @connect(state => ({
   config: state.config
 }))
-class Docs extends React.Component {
+class Docs extends Component {
   static propTypes = {
     config: PropTypes.object.isRequired
   }

@@ -6,10 +6,6 @@ import ActionInfo from 'material-ui/svg-icons/action/info'
 
 import Inspector from 'react-json-view'
 
-/*
-SCRIPT COMPONENT:
-Renders a script with the ability to run onClick w/ prop functions
-*/
 const Script = ({ executeScript, id, title, description, body, executed, output, inspectorConfig }) => (
   <div>
     <ListItem

@@ -1,5 +1,4 @@
-import React, { PropTypes } from 'react'
-
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 //  Redux Actions
@@ -12,18 +11,13 @@ import Category from './Category/Category'
 import Search from './Search/Search'
 import Submit from './Submit/Submit'
 
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation'
+import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation'
 import EditorIcon from 'material-ui/svg-icons/action/code'
 import OutputIcon from 'material-ui/svg-icons/action/compare-arrows'
 import DocsIcon from 'material-ui/svg-icons/action/chrome-reader-mode'
 
 import { Card, CardTitle } from 'material-ui/Card'
 
-/*
-COMMUNITY VIEW:
-Show a list of scripts available as plug-ins
-Kind of like an app store
-*/
 @connect(
   state => ({
     groups: scriptGroups(state)
@@ -33,7 +27,7 @@ Kind of like an app store
     return { actions: bindActionCreators(actions, dispatch) }
   }
 )
-class Community extends React.Component {
+class Community extends Component {
   static propTypes = {
     groups: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired

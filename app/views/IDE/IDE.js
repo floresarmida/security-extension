@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 //  Styles
 import '../../styles/IDE.css'
@@ -6,24 +6,17 @@ import Editor from './Editor/Editor'
 import Output from './Output/Output'
 import Docs from './Docs/Docs'
 
-import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation'
+import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation'
 import EditorIcon from 'material-ui/svg-icons/action/code'
 import OutputIcon from 'material-ui/svg-icons/action/compare-arrows'
 import DocsIcon from 'material-ui/svg-icons/action/chrome-reader-mode'
 
-/*
-IDE VIEW:
-Provides several developer tools:
-  - Script editor
-  - Output manipulator
-  - API docs
-*/
 @connect(
   state => ({
     config: state.config
   })
 )
-class IDE extends React.Component {
+class IDE extends Component {
   static propTypes = {
     config: PropTypes.object.isRequired
   }
@@ -42,7 +35,6 @@ class IDE extends React.Component {
     { index } = this.state
   ) {
     const Views = [<Editor />, <Output />, <Docs />]
-    console.log('CONFIG', config)
     return (
       <section>
         <div>

@@ -1,19 +1,16 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 //  Redux Actions
 import { editConfig } from '../../ducks/config'
 const actions = { editConfig }
-//  Styles
+
+//  UI
 import '../../styles/Settings.css'
 
 import { Card, CardTitle } from 'material-ui/Card'
 import Toggle from 'material-ui/Toggle'
 
-/*
-SETTINGS VIEW:
-Allows users to tweak core settings
-*/
 @connect(
   state => ({
     autorun: state.config.autorun,
@@ -22,7 +19,7 @@ Allows users to tweak core settings
   }),
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-class Settings extends React.Component {
+class Settings extends Component {
   static propTypes = {
     autorun: PropTypes.bool.isRequired,
     editor: PropTypes.object.isRequired,

@@ -19,7 +19,7 @@ export const editConfig = (edits) => ({ type: EDIT_CONFIG, edits })
 /*
 REDUCER
 */
-export const initialState = {
+const initialState = {
   view: 'dashboard',
   autorun: false,
   dark: true,

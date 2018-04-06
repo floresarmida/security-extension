@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 @connect(
@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
     scripts: state.scripts
   })
 )
-class Submit extends React.Component {
+class Submit extends Component {
   static propTypes = {
     scripts: PropTypes.array.isRequired
   }
