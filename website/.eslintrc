@@ -1,0 +1,17 @@
+{
+  "ecmaFeatures": {
+    "jsx": true,
+    "es6": true,
+    "classes": true
+  },
+  "parser": "babel-eslint",
+  "plugins": ["react"],
+  "extends": ["standard", "standard-react"],
+  "globals": {
+    "it": true
+  },
+  "rules": {
+    "import/first": 0,
+    "react/no-unused-prop-types": 0
+  }
+}
