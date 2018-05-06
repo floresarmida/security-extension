@@ -1,6 +1,8 @@
 /*
-Finds all functions bound to DOM elements, e.g. onClick() events
+Name:         Get Bound Functions
+Version:      1.0
+Author:       Ryan Keller
+Description:  Finds all functions bound to DOM elements, e.g. onClick() events
+Group:        Inspection
 */
-export default `
-RETURN('Executed getBoundFunctions');
-`
+RETURN('Executed getBoundFunctions')

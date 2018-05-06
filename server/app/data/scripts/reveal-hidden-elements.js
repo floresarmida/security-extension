@@ -1,7 +1,10 @@
 /*
-Parses the page, forcefully revealing hidden page elements
+Name:         Get Inline Values
+Version:      1.0
+Author:       Ryan Keller
+Description:  Parses the page, forcefully revealing hidden page elements
+Group:        Inspection
 */
-export default `
 let selector = '*'
 let output = []
 let nodes = Array.from(document.querySelectorAll(selector))
@@ -14,4 +17,3 @@ for (let e of hidden) {
   output.push(JSON.parse(tag))
 }
 RETURN(output)
-`
