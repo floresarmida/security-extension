@@ -7,10 +7,10 @@ https://www.material-ui.com/#/customization/themes
 */
 //  Run getMuiTheme here to prevent unnecessary rerenders in App.js
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme'
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme'
 
 //  Single instance created then exported
 const Theme = getMuiTheme(
-  Object.assign({}, darkBaseTheme, {})
+  Object.assign({}, lightBaseTheme, {})
 )
 export default Theme

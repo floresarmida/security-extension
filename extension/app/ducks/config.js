@@ -25,13 +25,13 @@ const initialState = {
   dark: true,
   groups: ['Inspection', 'Static Analysis', 'Document Manipulation'],
   editor: {
-    theme: 'monokai',
-    fontSize: 16,
+    theme: 'tomorrow',
+    fontSize: 14,
     tabSize: 2,
     wrapEnabled: true,
     showPrintMargin: true,
     showGutter: true,
-    showLineNumbers: true,
+    showLineNumbers: false,
     highlightActiveLine: true,
     enableBasicAutocompletion: true,
     enableLiveAutocompletion: true,
@@ -39,12 +39,17 @@ const initialState = {
     displayDataTypes: true
   },
   inspector: {
-    theme: 'monokai',
-    indentWidth: 4,
+    theme: 'shapeshifter:inverted',
+    indentWidth: 2,
+    /*
+    DO NOT CHANGE "collapsed"
+    Unless you want to render 10k components and
+    crash every granny using a Compaq older than ground zero
+    */
     collapsed: true,
     displayDataTypes: true,
     displayObjectSize: true,
-    collapseStringsAfterLength: 25,
+    collapseStringsAfterLength: 20,
     enableClipboard: true
   }
 }

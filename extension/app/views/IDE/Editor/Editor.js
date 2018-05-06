@@ -51,15 +51,15 @@ class Editor extends Component {
     { input, packages, config, actions } = this.props
   ) {
     return (
-      <section>
+      <div>
         {config && <AceEditor
           name='composer'
           mode='javascript'
-          theme='monokai'
+          theme='tomorrow'
           {...config}
           value={input}
           width='100%'
-          height='400px'
+          height='395px'
           onChange={(input) => actions.editorInput(input)}
         />}
         <FlatButton
@@ -68,7 +68,7 @@ class Editor extends Component {
           label='Execute'
           onClick={() => actions.executeEditorScript(input)}
         />
-      </section>
+      </div>
     )
   }
 }

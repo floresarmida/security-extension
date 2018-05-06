@@ -41,7 +41,7 @@ class IDE extends Component {
   ) {
     const Views = [<Editor />, <Output />, <Docs />]
     return (
-      <section>
+      <article>
         <div>
           {Views[index]}
         </div>
@@ -62,7 +62,7 @@ class IDE extends Component {
             onClick={() => this.select(2)}
           />
         </BottomNavigation>
-      </section>
+      </article>
     )
   }
 }

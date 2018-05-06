@@ -28,7 +28,7 @@ class Output extends Component {
         <Inspector
           src={output}
           name={null}
-          collapsed={2}
+          // collapsed={2}
           iconStyle='square'
           {...inspectorConfig}
         />
