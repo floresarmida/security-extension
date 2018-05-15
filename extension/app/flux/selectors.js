@@ -6,6 +6,7 @@ preventing components from re-rendering unneccesarily.
 import { createSelector } from 'reselect'
 
 const select = {
+  db: state => state.firebase.data || {},
   scripts: (state) => state.scripts || [],
   groups: (state) => state.groups || [],
   config: (state) => state.config || {}

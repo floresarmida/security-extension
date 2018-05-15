@@ -81,6 +81,7 @@
     "bluebird": "^3.3.4",
     "chrome-extension-async": "^3.2.4",
     "cuid": "^2.0.2",
+    "firebase": "^5.0.2",
     "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "material-ui": "^0.20.0",
@@ -92,6 +93,7 @@
     "react-dom": "^15.0.2",
     "react-json-view": "^1.16.0",
     "react-redux": "^4.3.0",
+    "react-redux-firebase": "^2.1.1",
     "redux": "^3.2.1",
     "redux-thunk": "^2.0.1",
     "reselect": "^3.0.1"

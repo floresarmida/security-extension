@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 //  Redux Actions
 import { executeScript } from '../../ducks/scripts'
 import { scriptGroups } from '../../flux/selectors'
@@ -17,19 +17,24 @@ import OutputIcon from 'material-ui/svg-icons/action/compare-arrows'
 import DocsIcon from 'material-ui/svg-icons/action/chrome-reader-mode'
 
 import { Card, CardTitle } from 'material-ui/Card'
+import { firebaseConnect } from 'react-redux-firebase'
 
 /*
 COMMUNITY VIEW:
 Serves like an "app store" for users to share, rate and comment on scripts
 */
-@connect(
-  state => ({
-    groups: scriptGroups(state)
-  }),
-  dispatch => {
-    const actions = { executeScript }
-    return { actions: bindActionCreators(actions, dispatch) }
-  }
+@compose(
+  firebaseConnect(['scripts']),
+  connect(
+    state => ({
+      TEST: state.db,
+      groups: scriptGroups(state)
+    }),
+    dispatch => {
+      const actions = { executeScript }
+      return { actions: bindActionCreators(actions, dispatch) }
+    }
+  )
 )
 class Community extends Component {
   static propTypes = {

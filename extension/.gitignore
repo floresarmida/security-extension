@@ -4,6 +4,7 @@ npm-debug.log
 
 build/
 dev/
+app/flux/firebase.js
 
 *.zip
 *.crx
