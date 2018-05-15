@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import { changeView } from '../ducks/config'
+import { queryChromeTab } from '../ducks/tab'
 
 import AppBar from 'material-ui/AppBar'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -25,16 +26,15 @@ Hot reloading begins to be supported here
   state => ({
     view: state.config.view
   }),
-  dispatch => ({ actions: bindActionCreators({ changeView }, dispatch) })
+  dispatch => ({ actions: bindActionCreators({ changeView, queryChromeTab }, dispatch) })
 )
 class App extends Component {
   static propTypes = {
     view: PropTypes.string.isRequired
   }
   componentDidMount () {
-    console.log('APP:', chrome)
+    this.props.actions.queryChromeTab()
   }
-
   render (
     { view, actions } = this.props
   ) {

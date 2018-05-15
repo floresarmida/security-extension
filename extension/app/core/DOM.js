@@ -7,7 +7,7 @@ Serves as the interface between the popup DOM and content DOM
 
 Usage:
   type: 'script' | 'import'
-  body: the data (script body, import URLs, etc)
+  code: the data (script code, import URLs, etc)
 */
 
 /*
@@ -23,7 +23,7 @@ FLOW EXPLAINED:
 
 - Initialize a script tag with injection code to run in the RAW DOM
   - Begin with an async function wrapper
-  - Promisify the script body
+  - Promisify the script code
     - Await RETURN or REJECT
   - Create and dispatch an event listener, passing the promise return value
 - Inject the script, which executes immediately
@@ -35,7 +35,8 @@ FLOW EXPLAINED:
 */
 export const RAW_DOM_INJECTION = `
   function RAW_DOM_INJECTION (script = {}) {
-  const { id, title, body } = script
+  console.log('ATTEMPTING EXECUTION', script)
+  const { id, name, code } = script
   return new Promise((resolve, reject) => {
     try {
       /* EXECUTION ENVIRONMENT: RAW DOM -> CONTENT SCRIPT */
@@ -47,7 +48,7 @@ export const RAW_DOM_INJECTION = `
       /* EXECUTION ENVIRONMENT: CONTENT SCRIPT -> RAW DOM */
       const element = document.createElement('script')
       element.textContent = '(async function () {' +
-        'const execution = () => new Promise((RETURN, ERROR) => { ' + body + ' });' +
+        'const execution = () => new Promise((RETURN, ERROR) => { ' + code + ' });' +
         'let response = await execution();' +
         'var event = document.createEvent("CustomEvent");' +
         'event.initCustomEvent("' + id + '", true, true, response);' +
@@ -63,15 +64,15 @@ export const RAW_DOM_INJECTION = `
   })
 }
 `
-
+export default RAW_DOM_INJECTION
 /*
 //  How to do this with executeScript in case we need to:
-export const executeScript = (id, body) => {
+export const executeScript = (id, code) => {
   return function (dispatch) {
-    // const test = 'return document.body.innerHTML;'
+    // const test = 'return document.code.innerHTML;'
     try {
       chrome.tabs.executeScript(
-        { code: `(function(params) { ${body} })();` },
+        { code: `(function(params) { ${code} })();` },
         (output) => {
           dispatch({ type: EXECUTE_SCRIPT, id, output: output[0] || output })
         }
