@@ -19,5 +19,5 @@
     "page": "background.html"
   },
   "permissions": [ "contextMenus", "tabs", "storage", "<all_urls>" ],
-  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src 'self' data:;"
+  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'; connect-src 'self' wss://*.firebaseio.com; style-src * 'unsafe-inline'; img-src 'self' data:;"
 }

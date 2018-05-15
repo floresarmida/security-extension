@@ -57,6 +57,7 @@ class Community extends Component {
     const Views = [<Category />, <Search />, <Submit />]
     return (
       <section>
+        <span>{JSON.stringify(this.props)}</span>
         <div>
           {Views[index]}
         </div>

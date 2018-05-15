@@ -3,9 +3,16 @@ import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 import storage from './storage'
 
-const middlewares = applyMiddleware(thunk)
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
+import keys, { config } from './firebase'
+import firebase from 'firebase'
+firebase.initializeApp(keys) // <- new to v2.*.*
+
 const enhancer = compose(
-  middlewares,
+  applyMiddleware(
+    thunk.withExtraArgument(getFirebase)
+  ),
+  reactReduxFirebase(firebase, config),
   storage()
 )
 
