@@ -10,7 +10,7 @@ export default function parseScript (script) {
     // <key> :      <value> | the ":" gets discarded
     for (let line of metaText) {
       const [key, value] = line.split(':')
-      if (key && metaFields.includes(key)) metaData[key] = value.trim()
+      if (key && metaFields.includes(key)) metaData[key.toLowerCase()] = value.trim()
     }
     return metaData
   } else {

@@ -10,14 +10,14 @@ import Inspector from 'react-json-view'
 SCRIPT COMPONENT
 Renders a script's metadata w/ code preview
 */
-const Script = ({ executeScript, id, title, description, body, executed, output, inspectorConfig }) => (
+const Script = ({ executeScript, id, name, description, code, executed, output, inspectorConfig }) => (
   <div>
     <ListItem
-      primaryText={title}
+      primaryText={name}
       secondaryText={description}
       disabled={false}
       leftCheckbox={<Checkbox disabled={false}
-        onClick={() => executeScript(id, body)}
+        onClick={() => executeScript(id, code)}
       />}
       rightIcon={<ActionInfo />}
       style={{ paddingBottom: 4 }}
@@ -34,9 +34,10 @@ const Script = ({ executeScript, id, title, description, body, executed, output,
 
 Script.propTypes = {
   id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   description: PropTypes.string,
-  executed: PropTypes.bool.isRequired,
+  body: PropTypes.body,
+  // executed: PropTypes.bool.isRequired,
   executeScript: PropTypes.func.isRequired,
   output: PropTypes.any //  Should be array
 }

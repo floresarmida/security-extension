@@ -1,35 +1,32 @@
-import React, { Component, PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-//  Redux Actions
-import { addScript, editScript } from '../../ducks/scripts'
-const actions = { addScript, editScript }
+import React, { Component } from 'react'
 //  Styles
 import '../../styles/Dashboard.css'
+import Tab from './Tab/Tab'
 
 /*
 DASHBOARD VIEW:
 Shows groups & individual tasks that can be executed ad-hoc
 */
-@connect(
-  state => ({
-    scripts: state.scripts
-  }),
-  dispatch => ({ actions: bindActionCreators(actions, dispatch) })
-)
 class Dashboard extends Component {
-  static propTypes = {
-    scripts: PropTypes.array.isRequired
+  state = {
+    id: NaN,
+    index: NaN,
+    url: 'chrome://newtab/',
+    title: 'Tab'
   }
-  static defaultProps = {
-    scripts: []
+  componentDidMount () {
+    chrome.tabs.query(
+      { currentWindow: true, active: true },
+      (tabs) => {
+        const { id, index, url, title } = tabs[0]
+        this.setState({ id, index, url, title })
+      }
+    )
   }
-  render (
-    { scripts } = this.props
-  ) {
+  render () {
     return (
       <section>
-        Includes at a glance metrics for the application, scripts that ran on this page, logged output, etc.
+        <Tab {...this.state} />
       </section>
     )
   }
