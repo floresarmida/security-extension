@@ -33,14 +33,13 @@ FLOW EXPLAINED:
 
 - Event listener passes a message back the the BACKGROUND, our extension.
 */
+// Verified syntax and functionality 5/15/18 4:08PM
 export const RAW_DOM_INJECTION = `
   function RAW_DOM_INJECTION (script = {}) {
-  console.log('ATTEMPTING EXECUTION', script)
-  const { id, name, code } = script
   return new Promise((resolve, reject) => {
     try {
       /* EXECUTION ENVIRONMENT: RAW DOM -> CONTENT SCRIPT */
-      window.addEventListener(id, (e) => {
+      window.addEventListener(script.id, (e) => {
         /* EXECUTION ENVIRONMENT: CONTENT SCRIPT -> BACKGROUND (EXTENSION) */
         const { detail } = e
         resolve(detail)
@@ -48,10 +47,10 @@ export const RAW_DOM_INJECTION = `
       /* EXECUTION ENVIRONMENT: CONTENT SCRIPT -> RAW DOM */
       const element = document.createElement('script')
       element.textContent = '(async function () {' +
-        'const execution = () => new Promise((RETURN, ERROR) => { ' + code + ' });' +
+        'const execution = () => new Promise((RETURN, ERROR) => { ' + script.code + ' });' +
         'let response = await execution();' +
         'var event = document.createEvent("CustomEvent");' +
-        'event.initCustomEvent("' + id + '", true, true, response);' +
+        'event.initCustomEvent("' + script.id + '", true, true, response);' +
         'window.dispatchEvent(event);' +
       '})();';
       /* EXECUTION ENVIRONMENT: CONTENT SCRIPT -> RAW DOM */

@@ -7,7 +7,8 @@ Contains the redux actions for single script execution
 CORE SCRIPTS
 These are scripts built into the extension that can be automatically executed
 */
-import RAW_DOM_INJECTION from '../core/DOM'
+import uuid from 'uuid/v4'
+import { RAW_DOM_INJECTION } from '../core/DOM'
 
 /*
 CONSTANTS
@@ -27,15 +28,11 @@ ACTIONS
   Anonymous Functions: Asyncronous, returns an action creator
   Normal Functions: Are "Thunks", AKA functions that return a function that gets resolved by middleware. Used for async actions.
 */
-
 export const executeScript = (tab, script) => {
   return async function (dispatch) {
-    const { id, name, description, author, version, group, code } = script
     try {
       dispatch({ type: EXECUTE_SCRIPT, tab, script })
-      // FIXME: Placeholder data
-      script.code = `RETURN('TESTING!!');`
-      console.log('PAGES - Execute:', tab, script)
+      console.log('EXECUTING (for debugging, check whitespaces):', script)
       /*
       EXECUTION ENVIRONMENT: (traverses several worlds)
       BACKGROUND -> CONTENT SCRIPT
@@ -65,7 +62,7 @@ const initialState = []
 
 const actionsMap = {
   [SCRIPT_EXECUTED_SUCCESS] (state, action) {
-    const { tab, script } = action
+    const { tab, script, output = 'No Output' } = action
     let pages = Object.assign({}, state)
     // Initialize a new node by tab ID if necessary
     // TODO: Abstract out to a new function that also discards old nodes
@@ -74,11 +71,11 @@ const actionsMap = {
       pages[tab.id] = { id, index, title, url, analysis: {} }
     }
     // Return the results of the script in the tab "analysis" prop
-    pages[tab.id]['analysis'][script.id] = { output: script.output, date: Date.now() }
+    pages[tab.id]['analysis'][script.id] = { ...script, output, date: Date.now() }
     return pages
   },
   [SCRIPT_EXECUTED_FAILURE] (state, action) {
-    const { tab, script } = action
+    const { tab, script, output = 'An unknown error occured' } = action
     let pages = Object.assign({}, state)
     // Initialize a new node by tab ID if necessary
     // TODO: Abstract out to a new function that also discards old nodes
@@ -87,7 +84,7 @@ const actionsMap = {
       pages[tab.id] = { id, index, title, url, analysis: {} }
     }
     //  Code is identical for now
-    pages[tab.id]['analysis'][script.id] = { output: script.output, date: Date.now() }
+    pages[tab.id]['analysis'][script.id] = { ...script, output, date: Date.now() }
     return pages
   },
   //  TODO: Refactor to include queries.

@@ -24,10 +24,11 @@ const EDITOR_SCRIPT_ID = 'EDITOR_SCRIPT'
 ACTIONS
 */
 export const editorInput = (input) => ({ type: EDITOR_INPUT, input })
-// export const editorExecute = (body) => ({ type: EDITOR_EXECUTE, body })
-export const executeEditorScript = (body) => {
+// export const editorExecute = (code) => ({ type: EDITOR_EXECUTE, code })
+export const executeEditorScript = (code) => {
   return async function (dispatch) {
-    const script = { id: EDITOR_SCRIPT_ID, title: 'Editor Script', body }
+    const script = { id: EDITOR_SCRIPT_ID, title: 'Editor Script', code }
+    console.log('EDITOR SCRIPT', script)
     try {
       const tabs = await chrome.tabs
         .query({ active: true, currentWindow: true })
