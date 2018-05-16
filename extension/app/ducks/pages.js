@@ -14,14 +14,18 @@ import { RAW_DOM_INJECTION } from '../core/DOM'
 CONSTANTS
 */
 const EXECUTE_SCRIPT = 'EXECUTE_SCRIPT'
-const SCRIPT_EXECUTED_SUCCESS = 'SCRIPT_EXECUTED_SUCCESS'
-const SCRIPT_EXECUTED_FAILURE = 'SCRIPT_EXECUTED_FAILURE'
-const EXECUTE_SCRIPT_GROUP = 'EXECUTE_SCRIPT_GROUP'
+const EXECUTE_GROUP = 'EXECUTE_GROUP'
+const EXECUTE_EDITOR = 'EXECUTE_EDITOR'
+const SCRIPT_SUCCESS = 'SCRIPT_SUCCESS'
+const SCRIPT_FAILURE = 'SCRIPT_FAILURE'
 const CLEAR_EXECUTED = 'CLEAR_EXECUTED'
 //  Legacy
 export const SHOW_ALL = 'SHOW_ALL'
 export const SHOW_EXECUTED = 'SHOW_EXECUTED'
 export const SHOW_ACTIVE = 'SHOW_ACTIVE'
+
+// UUID / enum for editor scripts
+const EDITOR_SCRIPT_ID = 'EDITOR_SCRIPT'
 
 /*
 ACTIONS
@@ -44,14 +48,43 @@ export const executeScript = (tab, script) => {
         .tabs.executeAsyncFunction(tab.id, RAW_DOM_INJECTION, script)
       // For the sake of being able to stringify later
       if (output && typeof output !== 'object') output = [output]
-      dispatch({ type: SCRIPT_EXECUTED_SUCCESS, tab, script, output })
+      dispatch({ type: SCRIPT_SUCCESS, tab, script, output })
     } catch (err) {
       console.warn('Security Extension Error w/ Script:', err)
-      dispatch({ type: SCRIPT_EXECUTED_FAILURE, tab, script, output: err })
+      dispatch({ type: SCRIPT_FAILURE, tab, script, output: err })
     }
   }
 }
-export const executeGroup = (group) => ({ type: EXECUTE_SCRIPT_GROUP, group })
+export const executeEditorScript = (tab, code) => {
+  return async function (dispatch) {
+    const script = {
+      id: EDITOR_SCRIPT_ID,
+      name: 'Editor Script',
+      description: 'Run from the IDE',
+      code
+    }
+    try {
+      dispatch({ type: EXECUTE_EDITOR, tab, script })
+      console.log('EXECUTING (for debugging, check whitespaces):', script)
+      /*
+      EXECUTION ENVIRONMENT: (traverses several worlds)
+      BACKGROUND -> CONTENT SCRIPT
+      CONTENT SCRIPT -> RAW DOM
+      RAW DOM -> CONTENT SCRIPT
+      CONTENT SCRIPT -> BACKGROUND
+      */
+      let output = await chrome
+        .tabs.executeAsyncFunction(tab.id, RAW_DOM_INJECTION, script)
+      // For the sake of being able to stringify later
+      if (output && typeof output !== 'object') output = [output]
+      dispatch({ type: SCRIPT_SUCCESS, tab, script, output })
+    } catch (err) {
+      console.warn('Security Extension Error w/ Script:', err)
+      dispatch({ type: SCRIPT_FAILURE, tab, script, output: err })
+    }
+  }
+}
+export const executeGroup = (group) => ({ type: EXECUTE_GROUP, group })
 export const clearExecuted = (id) => ({ type: CLEAR_EXECUTED, id })
 //  clearAllExecuted
 
@@ -61,7 +94,7 @@ REDUCER
 const initialState = []
 
 const actionsMap = {
-  [SCRIPT_EXECUTED_SUCCESS] (state, action) {
+  [SCRIPT_SUCCESS] (state, action) {
     const { tab, script, output = 'No Output' } = action
     let pages = Object.assign({}, state)
     // Initialize a new node by tab ID if necessary
@@ -74,7 +107,7 @@ const actionsMap = {
     pages[tab.id]['analysis'][script.id] = { ...script, output, date: Date.now() }
     return pages
   },
-  [SCRIPT_EXECUTED_FAILURE] (state, action) {
+  [SCRIPT_FAILURE] (state, action) {
     const { tab, script, output = 'An unknown error occured' } = action
     let pages = Object.assign({}, state)
     // Initialize a new node by tab ID if necessary
@@ -88,7 +121,7 @@ const actionsMap = {
     return pages
   },
   //  TODO: Refactor to include queries.
-  [EXECUTE_SCRIPT_GROUP] (state, action) {
+  [EXECUTE_GROUP] (state, action) {
     return state
   },
   [CLEAR_EXECUTED] (state/*, action */) {

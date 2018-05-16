@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 //  Redux Actions
-import { editorInput, executeEditorScript } from '../../../ducks/editor'
-import { executeScript } from '../../../ducks/scripts'
+import { editorInput } from '../../../ducks/editor'
+import { executeEditorScript } from '../../../ducks/pages'
 //  Styles
 import AceEditor from 'react-ace'
 //  Import elements for react-ace (do not change or use require())
@@ -20,12 +20,13 @@ The core IDE for the user
 */
 @connect(
   state => ({
+    tab: state.tab,
     input: state.editor.input,
     packages: state.editor.packages,
     config: state.config.editor
   }),
   dispatch => {
-    const actions = { editorInput, executeScript, executeEditorScript }
+    const actions = { editorInput, executeEditorScript }
     return { actions: bindActionCreators(actions, dispatch) }
   }
 )
@@ -48,7 +49,7 @@ class Editor extends Component {
   - Make saving an onClick event?
   */
   render (
-    { input, packages, config, actions } = this.props
+    { tab, input, packages, config, actions } = this.props
   ) {
     return (
       <div>
@@ -66,7 +67,7 @@ class Editor extends Component {
           secondary
           fullWidth
           label='Execute'
-          onClick={() => actions.executeEditorScript(input)}
+          onClick={() => actions.executeEditorScript(tab, input)}
         />
       </div>
     )
