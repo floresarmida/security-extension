@@ -2,14 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { compose, bindActionCreators } from 'redux'
 //  Redux Actions
-import { executeScript } from '../../ducks/scripts'
+import { executeScript } from '../../ducks/pages'
 import { scriptGroups } from '../../flux/selectors'
 //  Styles
 import '../../styles/Community.css'
 
-import Category from './Category/Category'
-import Search from './Search/Search'
-import Submit from './Submit/Submit'
+import Category from './Category'
+import Search from './Search'
+import Submit from './Submit'
 
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation'
 import EditorIcon from 'material-ui/svg-icons/action/code'

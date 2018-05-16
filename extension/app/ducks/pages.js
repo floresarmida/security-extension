@@ -7,8 +7,8 @@ Contains the redux actions for single script execution
 CORE SCRIPTS
 These are scripts built into the extension that can be automatically executed
 */
-import uuid from 'uuid/v4'
-import { RAW_DOM_INJECTION } from '../core/DOM'
+import RAW_DOM_INJECTION from '../core/DOM'
+// import uuid from 'uuid/v4'
 
 /*
 CONSTANTS

@@ -4,56 +4,14 @@ Tracks the state of the editor (user input, script output, etc)
 */
 
 /*
-IMPORTS
-*/
-import { RAW_DOM_INJECTION } from '../core/DOM'
-// TODO: DRY execution function
-// import { executeScript } from './scripts'
-
-/*
 CONSTANTS
 */
 const EDITOR_INPUT = 'EDITOR_INPUT'
-// const EXECUTE_EDITOR_SCRIPT = 'EXECUTE_EDITOR_SCRIPT'
-const EDITOR_EXECUTED_SUCCESS = 'EDITOR_EXECUTED_SUCCESS'
-const EDITOR_EXECUTED_FAILURE = 'EDITOR_EXECUTED_FAILURE'
-// UUID / enum for editor scripts
-const EDITOR_SCRIPT_ID = 'EDITOR_SCRIPT'
 
 /*
 ACTIONS
 */
 export const editorInput = (input) => ({ type: EDITOR_INPUT, input })
-// export const editorExecute = (code) => ({ type: EDITOR_EXECUTE, code })
-export const executeEditorScript = (code) => {
-  return async function (dispatch) {
-    const script = { id: EDITOR_SCRIPT_ID, title: 'Editor Script', code }
-    console.log('EDITOR SCRIPT', script)
-    try {
-      const tabs = await chrome.tabs
-        .query({ active: true, currentWindow: true })
-      const activeTab = tabs[0].id
-      /*
-      EXECUTION ENVIRONMENT: (traverses several worlds)
-        BACKGROUND -> CONTENT SCRIPT
-        CONTENT SCRIPT -> RAW DOM
-        RAW DOM -> CONTENT SCRIPT
-        CONTENT SCRIPT -> BACKGROUND
-      */
-      let output = await chrome
-        .tabs.executeAsyncFunction(activeTab, RAW_DOM_INJECTION, script)
-      console.log('DOM output:', output)
-      //  Turn strings/ints into array form for JSON view
-      if (output && typeof output !== 'object') output = [output]
-      output
-        ? dispatch({ type: EDITOR_EXECUTED_SUCCESS, output })
-        : dispatch({ type: EDITOR_EXECUTED_SUCCESS, output: 'No Output' })
-    } catch (err) {
-      console.warn('Security Extension Error w/ Script:', err)
-      dispatch({ type: EDITOR_EXECUTED_FAILURE, output: err })
-    }
-  }
-}
 
 /*
 REDUCER
@@ -79,19 +37,12 @@ setTimeout(
 
 const initialState = {
   input: exampleScript,
-  output: '',
   packages: []
 }
 
 const actionsMap = {
   [EDITOR_INPUT] (state, action) {
     return Object.assign({}, state, { input: action.input })
-  },
-  [EDITOR_EXECUTED_SUCCESS] (state, action) {
-    return Object.assign({}, state, { output: action.output })
-  },
-  [EDITOR_EXECUTED_FAILURE] (state, action) {
-    return Object.assign({}, state, { output: action.output })
   }
 }
 

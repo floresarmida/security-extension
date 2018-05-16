@@ -21,8 +21,7 @@ REDUCER
 */
 const initialState = {
   view: 'dashboard',
-  autorun: false,
-  dark: true,
+  dark: false,
   groups: ['Inspection', 'Static Analysis', 'Document Manipulation'],
   editor: {
     theme: 'tomorrow',
@@ -39,14 +38,14 @@ const initialState = {
     displayDataTypes: true
   },
   inspector: {
-    theme: 'shapeshifter:inverted',
-    indentWidth: 2,
+    theme: 'bright:inverted',
+    indentWidth: 4,
+    iconStyle: 'triangle',
     /*
     DO NOT CHANGE "collapsed"
     Unless you want to render 10k components and
     crash every granny using a Compaq older than ground zero
     */
-    collapsed: true,
     displayDataTypes: true,
     displayObjectSize: true,
     collapseStringsAfterLength: 20,

@@ -23,7 +23,7 @@ Allows users to change app settings, editors, etc.
   }),
   dispatch => ({ actions: bindActionCreators(actions, dispatch) })
 )
-class Settings extends Component {
+class Docs extends Component {
   static propTypes = {
     autorun: PropTypes.bool.isRequired,
     editor: PropTypes.object.isRequired,
@@ -67,4 +67,4 @@ class Settings extends Component {
     )
   }
 }
-export default Settings
+export default Docs

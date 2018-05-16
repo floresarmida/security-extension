@@ -11,11 +11,11 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 import muiTheme from '../styles/MUI'
 import '../styles/App.css'
 
-import Dashboard from '../views/Dashboard/Dashboard'
-import Tasks from '../views/Tasks/Tasks'
-import IDE from '../views/IDE/IDE'
-import Community from '../views/Community/Community'
-import Settings from '../views/Settings/Settings'
+import Dashboard from '../views/Dashboard/'
+import Tasks from '../views/Tasks/'
+import IDE from '../views/IDE/'
+import Community from '../views/Community/'
+import Docs from '../views/Docs/'
 
 /*
 REACT APP
@@ -32,6 +32,11 @@ class App extends Component {
   static propTypes = {
     view: PropTypes.string.isRequired
   }
+  /*
+  Every time you open the popup, the app mounts
+  This function runs a query against the chrome API
+  then caches metadata about the current page.
+  */
   componentDidMount () {
     this.props.actions.queryChromeTab()
   }
@@ -55,8 +60,8 @@ class App extends Component {
             <Tab value='community' label='Community' >
               <Community />
             </Tab>
-            <Tab value='settings' label='Settings' >
-              <Settings />
+            <Tab value='docs' label='Docs' >
+              <Docs />
             </Tab>
           </Tabs>
         </div>

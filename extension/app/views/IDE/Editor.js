@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 //  Redux Actions
-import { editorInput } from '../../../ducks/editor'
-import { executeEditorScript } from '../../../ducks/pages'
+import { editorInput } from '../../ducks/editor'
+import { executeEditorScript } from '../../ducks/pages'
 //  Styles
 import AceEditor from 'react-ace'
 //  Import elements for react-ace (do not change or use require())

@@ -27,9 +27,8 @@ class Output extends Component {
       <section>
         <Inspector
           src={output}
-          name={null}
-          // collapsed={2}
-          iconStyle='square'
+          name='Editor Script Output'
+          collapsed={Object.keys(output).length >= 20}
           {...inspectorConfig}
         />
       </section>

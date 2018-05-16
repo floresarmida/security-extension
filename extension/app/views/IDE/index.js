@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-//  Styles
-import '../../styles/IDE.css'
-import Editor from './Editor/Editor'
-import Output from './Output/Output'
-import Docs from './Docs/Docs'
 
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation'
+import Editor from './Editor'
+import Output from './Output'
+import Docs from './Docs'
+
+import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation'
 import EditorIcon from 'material-ui/svg-icons/action/code'
 import OutputIcon from 'material-ui/svg-icons/action/compare-arrows'
 import DocsIcon from 'material-ui/svg-icons/action/chrome-reader-mode'
@@ -16,6 +15,7 @@ IDE VIEW:
 Provides an interactive dev environment,
 complete w/ docs for users to compose their own snippets.
 */
+import '../../styles/IDE.css'
 @connect(
   state => ({
     config: state.config
