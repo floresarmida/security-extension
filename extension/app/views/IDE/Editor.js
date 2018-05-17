@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 //  Redux Actions
 import { editorInput } from '../../ducks/editor'
-import { executeEditorScript } from '../../ducks/pages'
 //  Styles
 import AceEditor from 'react-ace'
 //  Import elements for react-ace (do not change or use require())
@@ -11,8 +10,6 @@ import 'brace'
 import 'brace/mode/javascript'
 import 'brace/theme/github'
 import 'brace/theme/monokai'
-
-import FlatButton from 'material-ui/FlatButton'
 
 /*
 IDE > EDITOR PANE
@@ -25,10 +22,7 @@ The core IDE for the user
     packages: state.editor.packages,
     config: state.config.editor
   }),
-  dispatch => {
-    const actions = { editorInput, executeEditorScript }
-    return { actions: bindActionCreators(actions, dispatch) }
-  }
+  dispatch => ({ actions: bindActionCreators({ editorInput }, dispatch) })
 )
 class Editor extends Component {
   static propTypes = {
@@ -52,24 +46,16 @@ class Editor extends Component {
     { tab, input, packages, config, actions } = this.props
   ) {
     return (
-      <div>
-        {config && <AceEditor
-          name='composer'
-          mode='javascript'
-          theme='tomorrow'
-          {...config}
-          value={input}
-          width='100%'
-          height='395px'
-          onChange={(input) => actions.editorInput(input)}
-        />}
-        <FlatButton
-          secondary
-          fullWidth
-          label='Execute'
-          onClick={() => actions.executeEditorScript(tab, input)}
-        />
-      </div>
+      <AceEditor
+        name='editor'
+        mode='javascript'
+        theme='tomorrow'
+        {...config}
+        value={input}
+        // width='400px'
+        // height='395px'
+        onChange={(input) => actions.editorInput(input)}
+      />
     )
   }
 }

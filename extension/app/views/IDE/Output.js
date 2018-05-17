@@ -1,37 +1,58 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
+import { EDITOR_SCRIPT_ID } from '../../ducks/pages'
+
 import Inspector from 'react-json-view'
 
 /*
 IDE > OUTPUT PANE
 Shows the output of a command
 */
-@connect(state => ({
-  output: state.editor.output,
-  inspectorConfig: state.config.inspector
-}))
+@connect(state => {
+  let output = ['No output']
+  const tab = state.pages[state.tab.id] || {}
+  console.log(output, tab)
+  if (tab.analysis && tab.analysis[EDITOR_SCRIPT_ID]) {
+    output = tab.analysis[EDITOR_SCRIPT_ID].output
+  }
+  return { output, config: state.config.inspector }
+})
 class Output extends Component {
   static propTypes = {
     output: PropTypes.object.isRequired,
-    inspectorConfig: PropTypes.object
+    config: PropTypes.object
   }
   static defaultProps = {
-    output: { 0: 'No output' },
-    inspectorConfig: {}
+    output: ['No output'],
+    config: {}
   }
   render (
-    { output, inspectorConfig } = this.props
+    { output, config } = this.props
   ) {
+    console.log('OUT:', output)
+    // Overriding config for responsiveness, sorry users
+    const miniConfig = Object.assign({}, config, {
+      fontSize: 12,
+      indentWidth: 2,
+      displayDataTypes: false,
+      displayObjectSize: false,
+      collapseStringsAfterLength: 10
+    })
     return (
-      <section>
-        <Inspector
-          src={output}
-          name='Editor Script Output'
-          collapsed={Object.keys(output).length >= 20}
-          {...inspectorConfig}
-        />
-      </section>
+      <div id='output'>
+        {output
+          ? <Inspector
+            src={output}
+            name={null}
+            collapsed={Object.keys(output).length >= 20}
+            {...miniConfig}
+          />
+          : <span id='no-output'>
+            <em>Output not available</em>
+          </span>
+        }
+      </div>
     )
   }
 }

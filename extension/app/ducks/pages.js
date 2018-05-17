@@ -25,7 +25,7 @@ export const SHOW_EXECUTED = 'SHOW_EXECUTED'
 export const SHOW_ACTIVE = 'SHOW_ACTIVE'
 
 // UUID / enum for editor scripts
-const EDITOR_SCRIPT_ID = 'EDITOR_SCRIPT'
+export const EDITOR_SCRIPT_ID = 'EDITOR_SCRIPT'
 
 /*
 ACTIONS
@@ -36,7 +36,6 @@ export const executeScript = (tab, script) => {
   return async function (dispatch) {
     try {
       dispatch({ type: EXECUTE_SCRIPT, tab, script })
-      console.log('EXECUTING (for debugging, check whitespaces):', script)
       /*
       EXECUTION ENVIRONMENT: (traverses several worlds)
       BACKGROUND -> CONTENT SCRIPT
@@ -65,7 +64,6 @@ export const executeEditorScript = (tab, code) => {
     }
     try {
       dispatch({ type: EXECUTE_EDITOR, tab, script })
-      console.log('EXECUTING (for debugging, check whitespaces):', script)
       /*
       EXECUTION ENVIRONMENT: (traverses several worlds)
       BACKGROUND -> CONTENT SCRIPT

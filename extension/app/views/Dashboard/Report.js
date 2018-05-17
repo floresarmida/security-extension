@@ -34,17 +34,18 @@ class Report extends Component {
         {analysis && analysis.map(script => (
           <Card key={script.id} style={{ marginBottom: 8 }}>
             <CardHeader
-              title={`${script.name} | Version ${script.version} by ${script.author}`}
+              title={`${script.name} | Version ${script.version || 1} by ${script.author || 'you!'}`}
               subtitle='Subtitle'
               actAsExpander
               showExpandableButton
             />
-            <CardText expandable>
+            <CardText expandable style={{ paddingTop: 0 }}>
               <pre><code>{script.code}</code></pre>
             </CardText>
             <Inspector
+              style={{ paddingTop: 0 }}
               src={script.output}
-              name={script.id}
+              name={null}
               collapsed={Object.keys(script.output).length >= 20}
               iconStyle='square'
               {...inspectorConfig}

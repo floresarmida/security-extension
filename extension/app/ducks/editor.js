@@ -16,24 +16,28 @@ export const editorInput = (input) => ({ type: EDITOR_INPUT, input })
 /*
 REDUCER
 */
-const exampleScript = `const extensionScript = {
+const exampleScript = `/*
+Welcome to your first script!
+See the documentation for more information
+*/
+const example = {
   intro: 'This is your first script - welcome!',
   details: 'Write any code you write and it will execute at the deepest execution environment possible, running alongside the active page',
   executionEnvironment: 'Core DOM (lower level than Chrome DevTools or the chrome extension API). The "isolated worlds" of chrome are circumvented',
   supportedFeatures: ['Promises', 'ES6', 'ES7', 'async/await']
-}
+};
+console.warn('Script executed!', example);
 
-console.warn('Security Extension was here!', extensionScript)
+/*
+To finish out your script, use RETURN(val) or ERROR(err)
+This callback will bubble an event with your output:
+  RETURN({ success: true, summary: extensionScript })
 
-//  To finish out your script, use RETURN(val) or ERROR(err)
-//  This callback will bubble an event with your value back to the extension, e.g.
-//  RETURN({ success: true, summary: extensionScript })
-
-//  And here's an async function, we're going to run this one for real.
-setTimeout(
-  () => RETURN({ success: true, summary: extensionScript }),
-  2000
-)`
+Async functions are implicitly supported.
+For example, this returns your value after 1 millisecond
+*/
+const success = true;
+setTimeout(() => RETURN({ example, success }), 1);`
 
 const initialState = {
   input: exampleScript,
