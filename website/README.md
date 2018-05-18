@@ -1,5 +1,0 @@
-
-# Capstone Landing Page 
-
-
-
