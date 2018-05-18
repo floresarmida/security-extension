@@ -80,9 +80,7 @@
   "dependencies": {
     "bluebird": "^3.3.4",
     "chrome-extension-async": "^3.2.4",
-    "cuid": "^2.0.2",
     "firebase": "^5.0.2",
-    "jquery": "^3.2.1",
     "lodash": "^4.17.4",
     "material-ui": "^0.20.0",
     "normalize.css": "^7.0.0",
@@ -96,7 +94,6 @@
     "react-redux-firebase": "^2.1.1",
     "redux": "^3.2.1",
     "redux-thunk": "^2.0.1",
-    "reselect": "^3.0.1",
     "uuid": "^3.2.1"
   }
 }

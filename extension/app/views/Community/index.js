@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { compose, bindActionCreators } from 'redux'
 //  Redux Actions
 import { executeScript } from '../../ducks/pages'
-import { scriptGroups } from '../../flux/selectors'
 //  Styles
 import '../../styles/Community.css'
 
@@ -28,7 +27,7 @@ Serves like an "app store" for users to share, rate and comment on scripts
   connect(
     state => ({
       TEST: state.db,
-      groups: scriptGroups(state)
+      groups: []
     }),
     dispatch => {
       const actions = { executeScript }
