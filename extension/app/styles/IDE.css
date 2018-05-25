@@ -6,7 +6,6 @@
 }
 #output {
   display: inline-block;
-  /* position: relative; */
   position: absolute;
   width: 300px;
   height: 450px;

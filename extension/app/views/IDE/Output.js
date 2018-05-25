@@ -12,7 +12,6 @@ Shows the output of a command
 @connect(state => {
   let output = ['No output']
   const tab = state.pages[state.tab.id] || {}
-  console.log(output, tab)
   if (tab.analysis && tab.analysis[EDITOR_SCRIPT_ID]) {
     output = tab.analysis[EDITOR_SCRIPT_ID].output
   }
@@ -30,7 +29,6 @@ class Output extends Component {
   render (
     { output, config } = this.props
   ) {
-    console.log('OUT:', output)
     // Overriding config for responsiveness, sorry users
     const miniConfig = Object.assign({}, config, {
       fontSize: 12,

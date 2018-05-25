@@ -14,7 +14,8 @@ import Inspector from 'react-json-view'
     const analysis = Object.keys(tabRecord).map(scriptID => tabRecord[scriptID])
     return {
       analysis,
-      inspectorConfig: state.config.inspector
+      inspectorConfig: state.config.inspector,
+      activeSection: state.config.view === 'dashboard'
     }
   }
 )
@@ -26,9 +27,9 @@ class Report extends Component {
     analysis: []
   }
   render (
-    { analysis, inspectorConfig } = this.props
+    { analysis, activeSection, inspectorConfig } = this.props
   ) {
-    console.log('analysis', analysis)
+    console.log('ACTIVE:', activeSection)
     return (
       <div>
         {analysis && analysis.map(script => (
@@ -42,14 +43,16 @@ class Report extends Component {
             <CardText expandable style={{ paddingTop: 0 }}>
               <pre><code>{script.code}</code></pre>
             </CardText>
-            <Inspector
-              style={{ paddingTop: 0 }}
-              src={script.output}
-              name={null}
-              collapsed={Object.keys(script.output).length >= 20}
-              iconStyle='square'
-              {...inspectorConfig}
-            />
+            {activeSection &&
+              <Inspector
+                style={{ paddingTop: 0 }}
+                src={script.output}
+                name={null}
+                collapsed={Object.keys(script.output).length >= 20}
+                iconStyle='square'
+                {...inspectorConfig}
+              />
+            }
           </Card>
         ))}
       </div>

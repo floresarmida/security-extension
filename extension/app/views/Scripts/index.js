@@ -15,7 +15,7 @@ import get from 'lodash/get'
 TASKS VIEW:
 Shows groups & individual tasks that can be executed ad-hoc
 */
-import '../../styles/Tasks.css'
+import '../../styles/Scripts.css'
 @compose(
   firebaseConnect(['scripts']),
   connect(
@@ -40,7 +40,7 @@ import '../../styles/Tasks.css'
     }
   )
 )
-class Tasks extends Component {
+class Scripts extends Component {
   static propTypes = {
     groups: PropTypes.object.isRequired,
     inspectorConfig: PropTypes.object.isRequired
@@ -78,4 +78,4 @@ class Tasks extends Component {
     )
   }
 }
-export default Tasks
+export default Scripts

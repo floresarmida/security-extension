@@ -12,9 +12,8 @@ import muiTheme from '../styles/MUI'
 import '../styles/App.css'
 
 import Dashboard from '../views/Dashboard/'
-import Tasks from '../views/Tasks/'
+import Scripts from '../views/Scripts/'
 import IDE from '../views/IDE/'
-import Community from '../views/Community/'
 import Docs from '../views/Docs/'
 
 /*
@@ -51,14 +50,11 @@ class App extends Component {
             <Tab value='dashboard' label='Dashboard' >
               <Dashboard />
             </Tab>
-            <Tab value='tasks' label='Tasks' >
-              <Tasks />
+            <Tab value='scripts' label='Scripts' >
+              <Scripts />
             </Tab>
             <Tab value='ide' label='IDE' >
               <IDE />
-            </Tab>
-            <Tab value='community' label='Community' >
-              <Community />
             </Tab>
             <Tab value='docs' label='Docs' >
               <Docs />
