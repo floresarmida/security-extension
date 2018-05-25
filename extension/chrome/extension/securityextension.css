@@ -18,7 +18,7 @@ button {
 }
 
 body {
-  min-width: 600px;
+  min-width: 800px;
   max-width: 800px;
   margin: 0 auto;
   -webkit-font-smoothing: antialiased;
