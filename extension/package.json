@@ -93,7 +93,6 @@
     "react-redux": "^4.3.0",
     "react-redux-firebase": "^2.1.1",
     "redux": "^3.2.1",
-    "redux-thunk": "^2.0.1",
-    "uuid": "^3.2.1"
+    "redux-thunk": "^2.0.1"
   }
 }

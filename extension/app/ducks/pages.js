@@ -8,7 +8,6 @@ CORE SCRIPTS
 These are scripts built into the extension that can be automatically executed
 */
 import RAW_DOM_INJECTION from '../core/DOM'
-// import uuid from 'uuid/v4'
 
 /*
 CONSTANTS
