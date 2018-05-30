@@ -75,9 +75,9 @@ describe('window (popup) page', function test () {
 
   after(async () => driver.quit())
 
-  it('should open Security Extension Example', async () => {
+  it('should open Hack This', async () => {
     const title = await driver.getTitle()
-    expect(title).to.equal('Security Extension Example (Window)')
+    expect(title).to.equal('Hack This (Window)')
   })
 
   it('should can add todo', async () => {

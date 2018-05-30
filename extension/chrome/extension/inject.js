@@ -21,7 +21,7 @@ class InjectApp extends Component {
     return (
       <div>
         <button onClick={this.buttonOnClick}>
-          Open Security Extension
+          Open Hack This
         </button>
         <Dock
           position='right'

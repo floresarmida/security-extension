@@ -48,7 +48,7 @@ export const executeScript = (tab, script) => {
       if (output && typeof output !== 'object') output = [output]
       dispatch({ type: SCRIPT_SUCCESS, tab, script, output })
     } catch (err) {
-      console.warn('Security Extension Error w/ Script:', err)
+      console.warn('Hack This: Error w/ Script:', err)
       dispatch({ type: SCRIPT_FAILURE, tab, script, output: err })
     }
   }
@@ -76,7 +76,7 @@ export const executeEditorScript = (tab, code) => {
       if (output && typeof output !== 'object') output = [output]
       dispatch({ type: SCRIPT_SUCCESS, tab, script, output })
     } catch (err) {
-      console.warn('Security Extension Error w/ Script:', err)
+      console.warn('Hack This: Error w/ Script:', err)
       dispatch({ type: SCRIPT_FAILURE, tab, script, output: err })
     }
   }

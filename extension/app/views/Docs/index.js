@@ -16,17 +16,36 @@ class Docs extends Component {
     return (
       <section id='docs'>
         <Card style={{ marginBottom: 16 }}>
-          <CardTitle title='Documentation' />
+          <CardTitle title='Overview' style={{ paddingBottom: 0 }} />
           <CardText>
-            Lorem ipsum dolor sit amet, et pri epicurei rationibus incorrupte, et qui modus adipiscing comprehensam, exerci eloquentiam signiferumque an cum. Oratio liberavisse at nam, an omnium reprimique nec. Id blandit mnesarchum cotidieque duo, adipiscing adversarium repudiandae ut sit, enim partiendo rationibus id has. Id labitur equidem laoreet vim.
-
-            No quando suavitate pri, eu his paulo constituam philosophia. Cum in etiam numquam, volumus consectetuer id cum. Mea ea quaestio consequuntur, sanctus denique cum ex. Ne vis nonumy aeterno ceteros. Ex hinc assum legendos eum, sea ut vocent instructior.
-
-            Dolores placerat et usu, ad pri probo ferri. Qui dicta adversarium ea. Possit debitis adolescens ne vel. Quas posidonium sed ei.
-
-            No civibus inciderint sed. At zril altera eruditi vis. Qui ea brute dolorem, ei solet nemore vix. Ex per putent erroribus forensibus, offendit persequeris id sed. Dolore expetendis per cu, maiorum argumentum ut pri. Et mei ceteros propriae, usu cibo torquatos definitiones eu.
-
-            Quando efficiendi ne his, cibo eleifend mei an. Pri eu brute recusabo, ne malis ubique nostro per, eos viderer pertinax voluptatibus eu. Ne mei iudico urbanitas quaerendum. Id duo saepe equidem efficiantur, at accusamus patrioque per. His et dico cibo munere.
+            <p>
+              Hack This features three panels:
+            </p>
+            <ul>
+              <li><b>Dashboard:</b> View page information</li>
+              <li><b>Scripts:</b> Run premade / saved scripts</li>
+              <li><b>IDE:</b> Develop and run custom scripts</li>
+            </ul>
+            <p>
+              For the average user, we recommend that you run premade scripts in the Script tab, then inspect the output in Dashboard. Experienced users will find the IDE beneficial, as it allows them to write JavaScript with autocompletion, linting and save functionality.
+            </p>
+          </CardText>
+        </Card>
+        <Card style={{ marginBottom: 16 }}>
+          <CardTitle title='Writing Scripts' style={{ paddingBottom: 0 }} />
+          <CardText>
+            <p>
+              Scripts are written in JavaScript and execute asynchronously by default, meaning you can make API calls and operations taking significant amounts of time without suffering from race conditions.
+            </p>
+            <p>
+              Hack This's API exposes two global functions: RETURN and ERROR. These functions consume a JSON object and record the resultant output. This could be a payload including page data, an analysis of vulnerabilities found, or a simple success indicator as a boolean.
+            </p>
+            <p>
+              Every script must include RETURN and a JSON object to return, otherwise the script will not run.
+            </p>
+            <p>
+              Scripts will save automatically, even if you close the tab or browser itself.
+            </p>
           </CardText>
         </Card>
       </section>

@@ -28,7 +28,7 @@ export const queryChromeTab = () => {
       const tab = tabs[0]
       dispatch({ type: TAB_CONNECTED, tab })
     } catch (err) {
-      console.warn('Security Extension Error w/ Script:', err)
+      console.warn('Hack This: Error w/ Script:', err)
       dispatch({ type: TAB_DISCONNECTED, output: err })
     }
   }

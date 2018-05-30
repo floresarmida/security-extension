@@ -45,7 +45,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div id='body'>
-          <AppBar title='Security Extension' showMenuIconButton={false} />
+          <AppBar title='Hack This' showMenuIconButton={false} />
           <Tabs value={view} onChange={actions.changeView}>
             <Tab value='dashboard' label='Dashboard' >
               <Dashboard />

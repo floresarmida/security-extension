@@ -32,7 +32,7 @@ function popWindow (type) {
 
 chrome.contextMenus.create({
   id: CONTEXT_MENU_ID,
-  title: 'Security Extension',
+  title: 'Hack This',
   contexts: ['all'],
   documentUrlPatterns: ['<all_urls>']
 })
